@@ -74,7 +74,7 @@ ul.square-list {
     list-style-type: square;
 }
 
-.square-list li {
+ul.square-list li {
     /* Estilos adicionales para cada elemento de la lista */
 }
 
