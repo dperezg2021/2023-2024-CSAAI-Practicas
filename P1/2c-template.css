@@ -70,6 +70,13 @@ img {
     background-color: #5B2C6F; /* MORADO */
   }
   
+ul.square-list {
+    list-style-type: square;
+}
+
+.square-list li {
+    /* Estilos adicionales para cada elemento de la lista */
+}
 
   /* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
 /* Así conseguimos que el contenido se vea bien en dispositvos móviles */
