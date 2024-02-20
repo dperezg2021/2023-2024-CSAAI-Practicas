@@ -1,0 +1,90 @@
+/* https://www.w3schools.com/howto/howto_css_two_columns.asp */
+/* https://developer.mozilla.org/es/docs/Web/CSS/box-sizing */
+/* Así definimos el comportamiento de caja para todos los elementos */
+* {
+    box-sizing: border-box;
+  }
+  
+/* Crear columnas de ancho diferente que se colocan una a continuación de la otra */
+.columna {
+float: left;
+padding: 10px;
+min-height: 500px;
+}
+
+.izquierda {
+width: 25%;
+}
+
+.derecha {
+width: 75%;
+}
+
+/* Clear floats despues de las columnas para eliminar la superposición */
+.filla:after {
+content: "";
+display: table;
+clear: both;
+}
+
+#c1 {
+    background-color:#2874A6;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#f0f0f0;
+}
+
+#c2 {
+    background-color:#AED6F1;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#000000;
+}
+
+/* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
+/* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
+
+img {
+    width: 75%;
+    height: auto;
+    display:block;
+    margin-bottom: 10px;
+}
+
+.iresponsive {
+    padding: 0 6px;
+    float: left;
+    width: 50%;
+  }
+
+
+  
+/* Estilos para la barra de progreso */
+.barra-progreso {
+    height: 20px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      overflow: hidden;
+  }
+  
+.nivel {
+    height: 100%;
+    background-color: #5B2C6F; /* MORADO */
+  }
+  
+
+  /* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
+/* Así conseguimos que el contenido se vea bien en dispositvos móviles */
+
+@media screen and (max-width: 600px) {
+    .columna {
+      width: 100%;
+    }
+
+    .iresponsive {
+        width: 100%;
+    }
+}
+.fila{
+    display:flex;
+}
+
+/* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
