@@ -48,7 +48,6 @@ img {
 @media only screen and (max-width: 600px) {
     .iresponsive {
       width: 100%; /* Cambia el ancho a 100% en pantallas más pequeñas */
-      float: none; /* Elimina la propiedad float */
-      padding: 0; /* Elimina el relleno en pantallas más pequeñas */
+ 
     }
   }
