@@ -45,7 +45,7 @@ clear: both;
 /* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
 
 img {
-    width: 80%;
+    width: 60%;
     height: auto;
     display:block;
     margin-bottom: 0 auto;
