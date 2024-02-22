@@ -90,11 +90,11 @@ ul.square-list li {
         float: none; /* Elimina la propiedad float */
         padding: 0; /* Elimina el relleno en pantallas más pequeñas */
     }
-
+  }
 .fila{
     display:flex;
 }
-}
+
 /* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
 
 
