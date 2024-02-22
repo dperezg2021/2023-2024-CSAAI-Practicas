@@ -46,9 +46,7 @@ img {
     max-width: 100%;
     height: auto;
 }
-@media only screen and (max-width: 600px) {
-    .iresponsive {
-      width: 50%; /* Cambia el ancho a 100% en pantallas más pequeñas */
- 
-    }
-  }
+.audio-table-container {
+    overflow-x: auto; /* Enable horizontal scrolling on small screens */
+    max-width: 100%; /* Ensure the table doesn't exceed the width of its container */
+}
