@@ -46,10 +46,7 @@ img {
     max-width: 100%;
     height: auto;
 }
-.audio-table-container {
-    overflow-x: auto; /* Enable horizontal scrolling on small screens */
-    max-width: 100%; /* Ensure the table doesn't exceed the width of its container */
-}
+
 @media screen and (max-width: 600px) {
     .audio-table-container {
         overflow-x: auto; /* Enable horizontal scrolling on small screens */
