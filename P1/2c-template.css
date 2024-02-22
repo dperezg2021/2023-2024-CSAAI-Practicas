@@ -87,6 +87,8 @@ ul.square-list li {
 
     .iresponsive {
         width: 100%;
+        float: none; /* Elimina la propiedad float */
+        padding: 0; /* Elimina el relleno en pantallas más pequeñas */
     }
 }
 .fila{
@@ -94,3 +96,6 @@ ul.square-list li {
 }
 
 /* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
+
+
+
