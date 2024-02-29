@@ -75,6 +75,11 @@ ul.square-list li {
   /* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
 /* Así conseguimos que el contenido se vea bien en dispositvos móviles */
 
+.iresponsive{
+  padding : 0 6px;
+  float: left;
+  width: 50%;
+}
 @media screen and (max-width: 600px) {
     .columna {
       width: 100%;
