@@ -13,8 +13,18 @@ p {
 
 }
 
-/* Estilo para cada botón */
-/* Estilo para cada botón */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('camuflash.jpeg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* No repetir la imagen */
+}
+/*estilo de botones*/
 .numberButton,
 #start,
 #stop,
@@ -34,7 +44,7 @@ p {
     transition: background-color 0.3s ease; /* Transición suave del color de fondo */
 }
 
-/* Estilo cuando el mouse está encima */
+/* Estilo cuando ratón  encima */
 .numberButton:hover,
 #start:hover,
 #stop:hover,
@@ -42,28 +52,13 @@ p {
     background-color: #333;
 }
 
-/* Estilo cuando se hace clic */
+/* Estilo cuando se hace click */
 .numberButton:active,
 #start:active,
 #stop:active,
 #reset:active {
     background-color: #222;
 }
-
-
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-image: url('camuflash.jpeg'); /* Ruta de la imagen de fondo */
-    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centrar la imagen */
-    background-repeat: no-repeat; /* No repetir la imagen */
-}
-
 
 
 /* Estilos para la tabla */
@@ -108,6 +103,7 @@ tr:nth-child(even) {
     border-radius: 5px; /* Radio de borde */
     display: inline-block; /* Para que el contenedor se ajuste al contenido */
 }
+
 .asterisco {
     font-size: 30px;
     text-align: center;
@@ -124,17 +120,42 @@ tr:nth-child(even) {
     font-size: 30px;
 }
 
+
 #audioContainer {
-    background-color: #1b1313; /* Color de fondo de las filas impares */
     position: fixed; /* Posicionamiento fijo */
-    bottom: 10px; /* Distancia desde la parte inferior */
-    right: 30px; /* Distancia desde la parte derecha */
-    background-color: #4d4545; /* Color de fondo de la caja */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 6px; /* Radio de borde */
+    bottom: 20px; /* Distancia desde la parte inferior */
+    right: 20px; /* Distancia desde la parte derecha */
+    padding: 5px; /* Espaciado interno */
+    border-radius: 4px; /* Radio de borde */
     z-index: 999; /* Asegura que esté por encima de otros elementos */
+    background-color: #555; /* Color de fondo */
+    text-align: center;
+
 
 }
+
+/* Estilo para el botón de audio */
+#audioContainer audio {
+    width: 80px; /* Ancho del botón de audio */
+    height: 30px; /* Altura del botón de audio */
+    background-color: #555; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    font-size: 7px; /* Tamaño de la fuente */
+    cursor: pointer; /* Cursor al pasar por encima */
+    border-radius: 15px; /* Radio de borde */
+}
+
+/* Estilo para el botón de audio al pasar el ratón */
+#audioContainer audio:hover {
+    background-color: #333; /* Cambia el color de fondo al pasar el ratón */
+}
+
+/* Estilo para el botón de audio al hacer clic */
+#audioContainer audio:active {
+    background-color: #222; /* Cambia el color de fondo al hacer clic */
+}
+
 
 @media screen and (max-width: 600px) {
     #container {
