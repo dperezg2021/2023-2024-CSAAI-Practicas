@@ -1,0 +1,150 @@
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto); /* Crea tres columnas automáticas */
+    grid-gap: 5px; /* Espacio entre los botones */
+    justify-content: center; /* Centra el contenido horizontalmente */
+}
+
+/* Estilo para centrar el contenido de los elementos p */
+p {
+    color: rgb(255, 255, 255); /* Color del texto */
+    text-align: center; /* Alineación del texto */
+
+}
+
+/* Estilo para cada botón */
+/* Estilo para cada botón */
+.numberButton,
+#start,
+#stop,
+#reset {
+    width: 90px; /* Ancho fijo para todos los botones */
+    height: 90px; /* Altura de cada botón */
+    background-color: #555; /* Color de fondo */
+    border: none; /* Sin borde */
+    color: rgb(255, 255, 255); /* Color del texto */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin decoración de texto */
+    display: inline-block; /* Mostrar como un bloque en línea */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor al pasar por encima */
+    border-radius: 8px; /* Radio de borde */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Difuminado */
+    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+}
+
+/* Estilo cuando el mouse está encima */
+.numberButton:hover,
+#start:hover,
+#stop:hover,
+#reset:hover {
+    background-color: #333;
+}
+
+/* Estilo cuando se hace clic */
+.numberButton:active,
+#start:active,
+#stop:active,
+#reset:active {
+    background-color: #222;
+}
+
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('camuflash.jpeg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* No repetir la imagen */
+}
+
+
+
+/* Estilos para la tabla */
+table {
+    width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
+    border-collapse: collapse; /* Combina los bordes de las celdas */
+    background-color: #4d4545; /* Color de fondo de la tabla */
+}
+
+/* Estilos para las celdas de la tabla */
+td {
+    padding: 8px; /* Espaciado interno de las celdas */
+    border: 2px solid #000000; /* Borde de las celdas */
+    text-align: center; /* Centra el contenido de las celdas */
+}
+
+/* Estilos para las filas impares de la tabla */
+tr:nth-child(odd) {
+    background-color: #837b7b; /* Color de fondo de las filas impares */
+}
+
+/* Estilos para las filas pares de la tabla */
+tr:nth-child(even) {
+    background-color: #837b7b; /* Color de fondo de las filas pares */
+}
+
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.numberButton {
+    width: 90px; /* Ajusta el tamaño deseado */
+    height: 90px; /* Ajusta el tamaño deseado */
+}
+
+.border-container {
+    border: 2px solid black; /* Borde sólido de 2px en color negro */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Radio de borde */
+    display: inline-block; /* Para que el contenedor se ajuste al contenido */
+}
+.asterisco {
+    font-size: 30px;
+    text-align: center;
+    color: red; /* Set the initial color for asterisks */
+}
+
+.correct-guess {
+    color: rgb(103, 182, 103); /* Color del acierto */
+    font-size: 30px;
+}
+
+#display {
+    color: red; /* Color del texto en rojo */
+    font-size: 30px;
+}
+
+#audioContainer {
+    background-color: #1b1313; /* Color de fondo de las filas impares */
+    position: fixed; /* Posicionamiento fijo */
+    bottom: 10px; /* Distancia desde la parte inferior */
+    right: 30px; /* Distancia desde la parte derecha */
+    background-color: #4d4545; /* Color de fondo de la caja */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 6px; /* Radio de borde */
+    z-index: 999; /* Asegura que esté por encima de otros elementos */
+
+}
+
+@media screen and (max-width: 600px) {
+    #container {
+        padding: 10px; /* Reducir el espaciado interno en pantallas pequeñas */
+    }
+
+    .numberButton,
+    #start,
+    #stop,
+    #reset {
+        width: 45%; /* Ajustar el ancho de los botones en pantallas pequeñas */
+    }
+}
