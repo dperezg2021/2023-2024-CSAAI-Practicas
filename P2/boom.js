@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-
     display = document.getElementById("display")
     boton1 = document.getElementById("boton1")
     boton2 = document.getElementById("boton2")
@@ -17,10 +16,8 @@ document.addEventListener("DOMContentLoaded", function() {
     n4 = document.getElementById("n4")
 
     let clave = generarClave();
-
     console.log(clave);
     let pantalla = [];
-
     const crono = new Crono(display);
 
     function generarClave() {
@@ -34,29 +31,26 @@ document.addEventListener("DOMContentLoaded", function() {
         return clavegenerada;
     }
 
-
+    function comprobarClave() {
+        if (n1.innerHTML !== '*' && n2.innerHTML !== '*' && n3.innerHTML !== '*' && n4.innerHTML !== '*' &&
+            n1.innerHTML === clave[0] && n2.innerHTML === clave[1] && n3.innerHTML === clave[2] && n4.innerHTML === clave[3]) {
+            crono.stop();
+        }
+    }
+    
     function asignarNumero(elemento) {
-        // Obtener el valor del botón pulsado
         var numero = elemento.value;
         crono.start();
-
-        // Verificar si el número coincide con algún dígito de la clave
+        
         for (let i = 0; i < clave.length; i++) {
             if (clave[i] === numero) {
-                // Mostrar el número en la posición correspondiente (n1, n2, n3 o n4)
                 document.getElementById("n" + (i + 1)).innerHTML = numero;
                 document.getElementById("n" + (i + 1)).classList.add('correct-guess');
             }
         }
-        if (n1.innerHTML !== '*' && n2.innerHTML !== '*' && n3.innerHTML !== '*' && n4.innerHTML !== '*') {
-            // Detener el cronómetro si se ha acertado la clave completa
-            crono.stop();
-        }
-
+       comprobarClave();
     }
 
-
-    // Agregar manejadores de eventos a los botones
     boton1.addEventListener("click", function() { asignarNumero(this); });
     boton2.addEventListener("click", function() { asignarNumero(this); });
     boton3.addEventListener("click", function() { asignarNumero(this); });
@@ -68,31 +62,28 @@ document.addEventListener("DOMContentLoaded", function() {
     boton9.addEventListener("click", function() { asignarNumero(this); });
     boton0.addEventListener("click", function() { asignarNumero(this); });
 
+
     const botonStop = document.getElementById("stop");
     botonStop.addEventListener("click", function() {
-        // Detener el cronómetro al pulsar el botón de detener
         crono.stop();
     });
 
-
     const botonreset = document.getElementById("reset");
     botonreset.addEventListener("click", function() {
-        // Detener el cronómetro al pulsar el botón de detener
         crono.reset();
-        console.log(clave);
         clave = generarClave();
+        console.log(clave);
         n1.innerHTML = '*';
         n2.innerHTML = '*';
         n3.innerHTML = '*';
         n4.innerHTML = '*';
-
         n1.classList.remove('correct-guess');
         n2.classList.remove('correct-guess');
         n3.classList.remove('correct-guess');
         n4.classList.remove('correct-guess');
-
     });
-
 });
+
+
 
 

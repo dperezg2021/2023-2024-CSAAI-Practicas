@@ -166,8 +166,19 @@ tr:nth-child(even) {
     #reset {
         width: 45%; /* Ajustar el ancho de los botones en pantallas pequeñas */
     }
-    #audioContainer {
-        overflow-y: auto; /* Agrega desplazamiento vertical cuando el contenido excede la altura máxima */
 
+    #audioContainer {
+        position: relative; /* Cambia el posicionamiento a relativo en pantallas pequeñas */
+        bottom: auto; /* Elimina la distancia desde la parte inferior */
+        right: auto; /* Elimina la distancia desde la parte derecha */
+        max-height: 150px; /* Altura máxima del contenedor de audio */
+        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
+        padding: 5px; /* Ajusta el espaciado interno */
+    }
+
+    #audioContainer audio {
+        width: 70px; /* Ancho del elemento de audio al 100% del contenedor */
+        height: auto; /* Altura automática para mantener la proporción */
+        font-size: 10px; /* Tamaño de la fuente ajustado */
     }
 }
