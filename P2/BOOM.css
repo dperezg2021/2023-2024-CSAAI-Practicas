@@ -130,8 +130,6 @@ tr:nth-child(even) {
     z-index: 999; /* Asegura que esté por encima de otros elementos */
     background-color: #555; /* Color de fondo */
     text-align: center;
-
-
 }
 
 /* Estilo para el botón de audio */
@@ -167,5 +165,9 @@ tr:nth-child(even) {
     #stop,
     #reset {
         width: 45%; /* Ajustar el ancho de los botones en pantallas pequeñas */
+    }
+    #audioContainer {
+        overflow-y: auto; /* Agrega desplazamiento vertical cuando el contenido excede la altura máxima */
+
     }
 }
