@@ -1,24 +1,24 @@
-document.addEventListener("DOMContentLoaded", function() {
-    display = document.getElementById("display")
-    boton1 = document.getElementById("boton1")
-    boton2 = document.getElementById("boton2")
-    boton3 = document.getElementById("boton3")
-    boton4 = document.getElementById("boton4")
-    boton5 = document.getElementById("boton5")
-    boton6 = document.getElementById("boton6")
-    boton7 = document.getElementById("boton7")
-    boton8 = document.getElementById("boton8")
-    boton9 = document.getElementById("boton9")
-    boton0 = document.getElementById("boton0")
-    n1 = document.getElementById("n1")
-    n2 = document.getElementById("n2")
-    n3 = document.getElementById("n3")
-    n4 = document.getElementById("n4")
+document.addEventListener("DOMContentLoaded", function () {
+    cont = document.getElementById("display");
+    valor1 = document.getElementById("boton1");
+    valor2 = document.getElementById("boton2");
+    valor3 = document.getElementById("boton3");
+    valor4 = document.getElementById("boton4");
+    valor5 = document.getElementById("boton5");
+    valor6 = document.getElementById("boton6");
+    valor7 = document.getElementById("boton7");
+    valor8 = document.getElementById("boton8");
+    valor9 = document.getElementById("boton9");
+    valor0 = document.getElementById("boton0");
+    a1 = document.getElementById("n1");
+    a2 = document.getElementById("n2");
+    a3 = document.getElementById("n3");
+    a4 = document.getElementById("n4");
 
-    let clave = generarClave();
-    console.log(clave);
-    let pantalla = [];
-    const crono = new Crono(display);
+    clave = generarClave();
+
+    pantalla = [];
+    const crono = new Crono(cont);
 
     function generarClave() {
         let clavegenerada = "";
@@ -32,8 +32,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function comprobarClave() {
-        if (n1.innerHTML !== '*' && n2.innerHTML !== '*' && n3.innerHTML !== '*' && n4.innerHTML !== '*' &&
-            n1.innerHTML === clave[0] && n2.innerHTML === clave[1] && n3.innerHTML === clave[2] && n4.innerHTML === clave[3]) {
+        if (a1.innerHTML !== '*' && a2.innerHTML !== '*' && a3.innerHTML !== '*' && a4.innerHTML !== '*' &&
+            a1.innerHTML === clave[0] && a2.innerHTML === clave[1] && a3.innerHTML === clave[2] && a4.innerHTML === clave[3]) {
             crono.stop();
         }
     }
@@ -51,16 +51,16 @@ document.addEventListener("DOMContentLoaded", function() {
        comprobarClave();
     }
 
-    boton1.addEventListener("click", function() { asignarNumero(this); });
-    boton2.addEventListener("click", function() { asignarNumero(this); });
-    boton3.addEventListener("click", function() { asignarNumero(this); });
-    boton4.addEventListener("click", function() { asignarNumero(this); });
-    boton5.addEventListener("click", function() { asignarNumero(this); });
-    boton6.addEventListener("click", function() { asignarNumero(this); });
-    boton7.addEventListener("click", function() { asignarNumero(this); });
-    boton8.addEventListener("click", function() { asignarNumero(this); });
-    boton9.addEventListener("click", function() { asignarNumero(this); });
-    boton0.addEventListener("click", function() { asignarNumero(this); });
+    valor1.addEventListener("click", function() { asignarNumero(this); });
+    valor2.addEventListener("click", function() { asignarNumero(this); });
+    valor3.addEventListener("click", function() { asignarNumero(this); });
+    valor4.addEventListener("click", function() { asignarNumero(this); });
+    valor5.addEventListener("click", function() { asignarNumero(this); });
+    valor6.addEventListener("click", function() { asignarNumero(this); });
+    valor7.addEventListener("click", function() { asignarNumero(this); });
+    valor8.addEventListener("click", function() { asignarNumero(this); });
+    valor9.addEventListener("click", function() { asignarNumero(this); });
+    valor0.addEventListener("click", function() { asignarNumero(this); });
 
 
     const botonStop = document.getElementById("stop");
@@ -73,14 +73,14 @@ document.addEventListener("DOMContentLoaded", function() {
         crono.reset();
         clave = generarClave();
         console.log(clave);
-        n1.innerHTML = '*';
-        n2.innerHTML = '*';
-        n3.innerHTML = '*';
-        n4.innerHTML = '*';
-        n1.classList.remove('correct-guess');
-        n2.classList.remove('correct-guess');
-        n3.classList.remove('correct-guess');
-        n4.classList.remove('correct-guess');
+        a1.innerHTML = '*';
+        a2.innerHTML = '*';
+        a3.innerHTML = '*';
+        a4.innerHTML = '*';
+        a1.classList.remove('correct-guess');
+        a2.classList.remove('correct-guess');
+        a3.classList.remove('correct-guess');
+        a4.classList.remove('correct-guess');
     });
 });
 
