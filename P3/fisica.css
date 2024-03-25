@@ -4,9 +4,81 @@
 */
 
 canvas {
-    background-color: rgb(255, 186, 249);
+    background-color: rgb(86, 167, 199);
     border-style: solid;
     border-width: 1px;
     border-color: black;
     border-radius: 5px;
-  }
+}
+
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.controls button,
+.controls input[type="range"] {
+    margin-bottom: 10px;
+}
+.controls button {
+  display: inline-block;
+}
+
+.slider-container {
+    margin-bottom: 20px;
+}
+
+.slider-value {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.controls input[type="range"] {
+  width: 200px; /* Ajusta el ancho del rango según sea necesario */
+}
+
+#valorangulo, #timer, #result {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+body {
+
+  background-image: url('tiro.jpeg'); /* Ruta de la imagen de fondo */
+  background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: no-repeat; /* No repetir la imagen */
+}
+
+#fire {
+    background-color: #e74c3c; /* Color rojizo */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Forma circular */
+    padding: 15px 30px; /* Tamaño más grande */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#fire:hover {
+    background-color: #c0392b; /* Color rojizo más oscuro al pasar el mouse */
+}
+
+#reset {
+    background-color: #e08a27; /* Color rojizo */
+    color: white;
+    border: none;
+    border-radius: 50%; /* Forma circular */
+    padding: 15px 30px; /* Tamaño más grande */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+#reset:hover {
+    background-color: #7a6802; /* Color rojizo más oscuro al pasar el mouse */
+}

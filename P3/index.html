@@ -13,7 +13,26 @@
     
     </head>
 <body>
-    <h2>Canvas</h2>
+    <h2>TIRO AL ARCO</h2>
     <canvas id="canvas"></canvas>
+    <div class="controls">
+        <div>
+            <button id="fire">Disparar</button>
+            <button id="reset">Inicio</button>
+        </div>
+        <div>
+            <span>Contador de tiempo: </span><span id="timer">0</span> segundos<br>
+            <span>Resultado del lanzamiento: </span><span id="result">-</span>
+        </div>
+        <p><label for="angle">Ángulo de salida:</label></p>
+        <input type="range" id="angle" name="angle" min="0" max="90" value="45">
+        <p id="valorangulo">45</p>
+        <p><label for="velocity">Velocidad de disparo:</label></p>
+        <input type="range" id="velocity" name="velocity" min="10" max="16" value="5">
+        <br>
+    </div>
 </body>
 </html>
+
+
+
