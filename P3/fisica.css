@@ -1,55 +1,64 @@
-/* Estilo del canvas
-  Lo bordeamos con una línea negra y le damos fondo
-  azul para distinguirlo
-*/
-
+/* Estilo del canvas */
 canvas {
-    background-color: rgb(86, 167, 199);
-    border-style: solid;
-    border-width: 1px;
-    border-color: black;
-    border-radius: 5px;
+  background-color: rgb(86, 167, 199);
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 5px;
 }
 
-
 .controls {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .controls button,
 .controls input[type="range"] {
     margin-bottom: 10px;
 }
+
 .controls button {
-  display: inline-block;
-}
-
-.slider-container {
-    margin-bottom: 20px;
-}
-
-.slider-value {
     display: inline-block;
-    margin-left: 10px;
 }
 
-.controls input[type="range"] {
-  width: 200px; /* Ajusta el ancho del rango según sea necesario */
+.ranges {
+  display: flex;
+  justify-content: normal;
+  align-items: center;
+  width: 100%;
 }
-
-#valorangulo, #timer, #result {
+    
+.slider-container {
+  margin-right: 20px; /* Ajusta el margen horizontal según sea necesario */
   display: inline-block;
-  margin-bottom: 10px;
+}
+
+.slider-container input[type="range"] {
+  display: block; /* Hacer que el slider sea un bloque */
+}
+
+.slider-container .slider-value {
+  display: block; /* Hacer que el valor del slider sea un bloque */
+  margin-top: 5px; /* Espacio entre el slider y su valor */
+}
+  
+.controls input[type="range"] {
+    width: 200px; /* Ajusta el ancho del rango según sea necesario */
+}
+
+#valorangulo,
+#timer,
+#result {
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
 body {
-
-  background-image: url('tiro.jpeg'); /* Ruta de la imagen de fondo */
-  background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
-  background-position: center; /* Centrar la imagen */
-  background-repeat: no-repeat; /* No repetir la imagen */
+    background-image: url('tiro.jpeg'); /* Ruta de la imagen de fondo */
+    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
+    background-position: center; /* Centrar la imagen */
+    background-repeat: no-repeat; /* No repetir la imagen */
 }
 
 #fire {
@@ -77,7 +86,6 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 
 #reset:hover {
     background-color: #7a6802; /* Color rojizo más oscuro al pasar el mouse */

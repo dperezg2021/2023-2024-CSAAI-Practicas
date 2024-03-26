@@ -6,6 +6,7 @@ const velocityInput = document.getElementById("velocity");
 const fireButton = document.getElementById("fire");
 const resetButton = document.getElementById("reset");
 const AnguloValor = document.getElementById("valorangulo");
+const VelocidadValor = document.getElementById("valorvelocidad");
 
 //-- Definir el tamaño del canvas
 canvas.width = 900;
@@ -23,9 +24,15 @@ let timerInterval;
 let initialVelocity = 10;
 let launchAngle = 0;
 const gravity = 0.3;
-let disparado = false; 
+let disparado = false;
 var colorMarronOscuro = '#654321';
 var nuevaPosicionX = generarPosicionXAleatoria();
+
+velocityInput.addEventListener('input', () => {
+  VelocidadValor.textContent = velocityInput.value;
+  velocityInput.value = velocityInput.value; // Actualizar el valor del slider
+
+});
 
 
 angleInput.addEventListener('input', () => {
@@ -49,7 +56,7 @@ function stopTimer() {
 
 function generarPosicionXAleatoria() {
   // Genera un número aleatorio entre 65 y el ancho total del lienzo (canvas.width)
-  return Math.floor(Math.random() * (canvas.width -100))+100;
+  return Math.floor(Math.random() * (canvas.width -130))+130;
 }
 
 //-- Función para reiniciar la animación
@@ -58,7 +65,6 @@ function resetAnimation() {
   yposicion = canvas.height - 50; // Restaurado a la esquina inferior izquierda
   flightTime = 0;
   timerDisplay.textContent = flightTime;
-  resultDisplay.textContent = '-';
   stopTimer();
   update();
 }
@@ -81,6 +87,7 @@ function detectarColision() {
   // Si la distancia es menor que el radio de la diana, hay colisión
   if (distancia < radioDiana) {
       return true;
+    
   } else {
       return false;
   }
@@ -137,22 +144,23 @@ function dibujarConfeti(x, y) {
 function dibujarNubes() {
   // Dibujar una nube
   ctx.beginPath();
-  ctx.arc(100, 100, 30, 0, Math.PI * 2);
-  ctx.arc(140, 100, 30, 0, Math.PI * 2);
-  ctx.arc(180, 100, 30, 0, Math.PI * 2);
-  ctx.arc(220, 100, 30, 0, Math.PI * 2);
-  ctx.arc(260, 100, 30, 0, Math.PI * 2);
-  ctx.arc(300, 100, 30, 0, Math.PI * 2);
+  ctx.arc(190, 100, 30, 0, Math.PI * 2);
+  ctx.arc(230, 100, 30, 0, Math.PI * 2);
+  ctx.arc(270, 100, 30, 0, Math.PI * 2);
+  ctx.arc(310, 100, 30, 0, Math.PI * 2);
+  ctx.arc(350, 100, 30, 0, Math.PI * 2);
+  ctx.arc(390, 100, 30, 0, Math.PI * 2);
   ctx.fillStyle = 'white';
   ctx.fill();
   ctx.closePath();
+  
 
   // Dibujar otra nube
   ctx.beginPath();
-  ctx.arc(500, 150, 40, 0, Math.PI * 2);
   ctx.arc(550, 150, 40, 0, Math.PI * 2);
   ctx.arc(600, 150, 40, 0, Math.PI * 2);
   ctx.arc(650, 150, 40, 0, Math.PI * 2);
+  ctx.arc(700, 150, 40, 0, Math.PI * 2);
   ctx.fillStyle = 'white';
   ctx.fill();
   ctx.closePath();
@@ -177,14 +185,13 @@ function dibujarContadorAciertos() {
   ctx.fillText(`Aciertos: ${contadorAciertos}`, canvas.width - 250, 40);
 }
 
-
 //-- Evento para el botón de disparo
 fireButton.addEventListener('click', () => {
   launchAngle = parseFloat(angleInput.value);
   initialVelocity = parseFloat(velocityInput.value);
   velx = initialVelocity * Math.cos((launchAngle * Math.PI) / 180)
-  console.log(initialVelocity);
-  console.log(launchAngle);
+  //console.log(initialVelocity);
+  //console.log(launchAngle);
   vely = initialVelocity * Math.cos((launchAngle * Math.PI) / 180)
   startTimer(); // Inicia el contador de tiempo
   disparado = true;
@@ -193,157 +200,175 @@ fireButton.addEventListener('click', () => {
 //-- Evento para el botón de inicio
 resetButton.addEventListener('click', () => {
   resetAnimation();
+  resultDisplay.textContent = '';
+  disparado = false;
   nuevaPosicionX = generarPosicionXAleatoria(); // Reinicia la posición de la diana
 });
 
 //-- Función principal de animación
 function update() {
 
-    //-- Algoritmo de animación:
-    //-- 1) Actualizar posiciones de los elementos
+  //-- Algoritmo de animación:
 
-    //-- 2) Borrar el canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    dibujarContadorAciertos();
-    dibujarNubes();
-   
+  //-- 2) Borrar el canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  dibujarContadorAciertos();
+  dibujarNubes()
 
-    //-- 3) Dibujar los elementos visibles
-     //-- Dibujar la diana
-    ctx.beginPath();
-    ctx.arc(nuevaPosicionX, canvas.height - 33, 32, 0, 2 * Math.PI); // Círculo exterior (rojo)
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 2;
-    ctx.fillStyle = 'red';
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  //-- 3) Dibujar los elementos visibles
+  //-- Dibujar césped
+  ctx.beginPath();
+  ctx.moveTo(0, canvas.height); // Mover al punto inicial en la esquina inferior izquierda
+  ctx.lineTo(canvas.width, canvas.height); // Dibujar una línea hasta la esquina inferior derecha
+  ctx.strokeStyle = 'green'; // Establecer el color de la línea a verde
+  ctx.lineWidth = 5; // Establecer el ancho de la línea
+  ctx.stroke(); // Dibujar la línea
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.arc(nuevaPosicionX, canvas.height - 33, 26, 0, 2 * Math.PI); // Círculo interior (blanco)
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    ctx.fillStyle = 'white';
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  //-- Dibujar sol
+  ctx.beginPath();
+  ctx.arc(38, 38, 56, 0, 2 * Math.PI); // Círculo exterior
+  ctx.strokeStyle = 'yellow'; // Cambiando el color del borde a amarillo
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'yellow'; // Cambiando el color de relleno a amarillo
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.arc(nuevaPosicionX, canvas.height - 33, 20, 0, 2 * Math.PI); // Círculo exterior (rojo)
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 2;
-    ctx.fillStyle = 'red';
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  //-- Dibujar la diana
+  ctx.beginPath();
+  ctx.arc(nuevaPosicionX, canvas.height - 33, 32, 0, 2 * Math.PI); // Círculo exterior (rojo)
+  ctx.strokeStyle = 'red';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'red';
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.arc(nuevaPosicionX, canvas.height - 33, 14, 0, 2 * Math.PI); // Círculo interior (blanco)
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    ctx.fillStyle = 'white';
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
-    
-    ctx.beginPath();
-    ctx.arc(nuevaPosicionX, canvas.height - 33, 8, 0, 2 * Math.PI); // Círculo exterior (rojo)
-    ctx.strokeStyle = 'red';
-    ctx.lineWidth = 2;
-    ctx.fillStyle = 'red';
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(nuevaPosicionX, canvas.height - 33, 26, 0, 2 * Math.PI); // Círculo interior (blanco)
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'white';
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 
-  //-- Dibujar la flecha 
-  //-- Dibujar cuerpo de la flecha
+  ctx.beginPath();
+  ctx.arc(nuevaPosicionX, canvas.height - 33, 20, 0, 2 * Math.PI); // Círculo exterior (rojo)
+  ctx.strokeStyle = 'red';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'red';
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.moveTo(xposicion + 5, yposicion + 10);  // Punto superior derecho del cuerpo de la flecha
-    ctx.lineTo(xposicion + 15, yposicion + 20);  // Punto inferior derecho del cuerpo de la flecha
-    ctx.lineTo(xposicion + 5, yposicion + 30);  // Punto inferior izquierdo del cuerpo de la flecha
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.arc(nuevaPosicionX, canvas.height - 33, 14, 0, 2 * Math.PI); // Círculo interior (blanco)
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'white';
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
+  
+  ctx.beginPath();
+  ctx.arc(nuevaPosicionX, canvas.height - 33, 8, 0, 2 * Math.PI); // Círculo exterior (rojo)
+  ctx.strokeStyle = 'red';
+  ctx.lineWidth = 2;
+  ctx.fillStyle = 'red';
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 
-    //-- Rellenar la punta de la flecha
-    ctx.fillStyle = colorMarronOscuro; 
-    ;
-    ctx.fill();
+//-- Dibujar la flecha 
+//-- Dibujar parte trasera de la flecha
+  ctx.beginPath();
+  ctx.moveTo(xposicion + 5, yposicion + 10);  // Punto superior derecho del cuerpo de la flecha
+  ctx.lineTo(xposicion + 15, yposicion + 20);  // Punto inferior derecho del cuerpo de la flecha
+  ctx.lineTo(xposicion + 5, yposicion + 30);  // Punto inferior izquierdo del cuerpo de la flecha
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.rect(xposicion-3, yposicion+10, 8, 20); // Posición y tamaño del cuadrado
-    ctx.fillStyle = colorMarronOscuro;  // Color del cuadrado (puedes cambiarlo)
-    ctx.fill(); // Rellenar el cuadrado
-    ctx.closePath();
+  ctx.fillStyle = colorMarronOscuro; 
+  ctx.fill();
 
-    ctx.beginPath();
-    ctx.moveTo(xposicion+3, yposicion + 20);  // Comienza desde el centro izquierdo
-    ctx.lineTo(xposicion + 35, yposicion + 20);  // Hasta el centro derecho
-    ctx.closePath();
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 5;
-    ctx.stroke();
+  ctx.beginPath();
+  ctx.rect(xposicion-3, yposicion+10, 8, 20); // Posición y tamaño del cuadrado
+  ctx.fillStyle = colorMarronOscuro;  // Color del cuadrado (puedes cambiarlo)
+  ctx.fill(); // Rellenar el cuadrado
+  ctx.closePath();
 
-    ctx.beginPath();
-    ctx.moveTo(xposicion +35, yposicion + 20);  // Comienza desde el centro izquierdo
-    ctx.lineTo(xposicion + 40, yposicion + 20);  // Hasta el centro derecho
-    ctx.closePath();
-    ctx.strokeStyle = 'black';
-    ctx.lineWidth = 5;
-    ctx.stroke();
+//-- Dibujar cuerpo de la flecha
+  ctx.beginPath();
+  ctx.moveTo(xposicion+3, yposicion + 20);  // Comienza desde el centro izquierdo
+  ctx.lineTo(xposicion + 35, yposicion + 20);  // Hasta el centro derecho
+  ctx.closePath();
+  ctx.strokeStyle = 'white';
+  ctx.lineWidth = 5;
+  ctx.stroke();
 
-    //-- Dibujar punta de la flecha
-    ctx.beginPath();
-    ctx.moveTo(xposicion + 40, yposicion + 10);  // Punto superior derecho del cuerpo de la flecha
-    ctx.lineTo(xposicion + 60, yposicion + 20);  // Punto inferior derecho del cuerpo de la flecha
-    ctx.lineTo(xposicion + 40, yposicion + 30);  // Punto inferior izquierdo del cuerpo de la flecha
-    ctx.closePath();
+//-- Dibujar parte delantera de la flecha
+  ctx.beginPath();
+  ctx.moveTo(xposicion +35, yposicion + 20);  // Comienza desde el centro izquierdo
+  ctx.lineTo(xposicion + 40, yposicion + 20);  // Hasta el centro derecho
+  ctx.closePath();
+  ctx.strokeStyle = 'black';
+  ctx.lineWidth = 5;
+  ctx.stroke();
 
-    //-- Rellenar la punta de la flecha
-    ctx.fillStyle = 'black';
-    ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(xposicion + 40, yposicion + 10);  // Punto superior derecho del cuerpo de la flecha
+  ctx.lineTo(xposicion + 60, yposicion + 20);  // Punto inferior derecho del cuerpo de la flecha
+  ctx.lineTo(xposicion + 40, yposicion + 30);  // Punto inferior izquierdo del cuerpo de la flecha
+  ctx.closePath();
+
+  ctx.fillStyle = 'black';
+  ctx.fill();
 
     //-- 4) Actualizar las coordenadas del proyectil en movimiento parabólico
-    if (flightTime > 0) {
-        // Actualizar posición en función de la velocidad
-        xposicion += velx;
-        yposicion -= vely - 0.5 * gravity * flightTime * flightTime;
-        vely -= gravity * flightTime;
+  if (flightTime > 0) {
+    // Actualizar posición en función de la velocidad
+    xposicion += velx;
+    yposicion -= vely - 0.5 * gravity * flightTime * flightTime;
+    vely -= gravity * flightTime;
 
-        // Verificar los límites del canvas
-        if (xposicion < 0) {
-            xposicion = 0; // Evitar que el cuadrado se salga por la izquierda
-            velx = 0; // Detener el movimiento horizontal
-        }
-        if (xposicion > canvas.width - 40) {
-            xposicion = canvas.width - 40; // Evitar que el cuadrado se salga por la derecha
-            velx = 0; // Detener el movimiento horizontal
-        }
-        if (yposicion > canvas.height - 40) {
-            yposicion = canvas.height - 40; // Evitar que el cuadrado se salga por la parte inferior
-            vely = 0; // Detener el movimiento vertical
-            velx= 0;
-        }
+    // Verificar los límites del canvas
+    if (xposicion < 0) {
+        xposicion = 0; // Evitar que el cuadrado se salga por la izquierda
+        velx = 0; // Detener el movimiento horizontal
     }
+    if (xposicion > canvas.width - 40) {
+        xposicion = canvas.width - 40; // Evitar que el cuadrado se salga por la derecha
+        velx = 0; // Detener el movimiento horizontal
+    }
+    if (yposicion > canvas.height - 40) {
+        yposicion = canvas.height - 40; // Evitar que el cuadrado se salga por la parte inferior
+        vely = 0; // Detener el movimiento vertical
+        velx= 0;
+    }
+  }
 
-    if (detectarColision()) {
+  if (detectarColision()) {
       resultDisplay.textContent = '¡Acertaste la diana!';
       stopTimer(); // Detener el contador de tiempo
       velx = 0; // Detener el movimiento horizontal
       vely = 0; // Detener el movimiento vertical
+      console.log(contadorAciertos);
       contadorAciertos++;
       dibujarConfeti(nuevaPosicionX, canvas.height - 33);
       return;
-    } else if(velx === 0 && vely === 0 && disparado) {
+  } else if (!detectarColision() && velx === 0 && vely === 0 && disparado) {
       resultDisplay.textContent = '¡Fallaste!';
-      stopTimer();
-    }
+      stopTimer(); // Detener el contador de tiempo
+      // Restablecer la bandera si no hubo colisión
+  }
   
-
   //-- 6) Volver a ejecutar update cuando toque
   requestAnimationFrame(update);
 }
 
 //-- ¡Que empiece la función!
 update(); 
+
 
 
