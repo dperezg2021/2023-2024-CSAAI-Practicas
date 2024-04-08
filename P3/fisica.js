@@ -140,58 +140,6 @@ function dibujarConfeti(x, y) {
   }, 4500);
 }
 
-function dibujarGota(x, y) {
-  ctx.beginPath();
-  ctx.arc(x, y, 2, 0, Math.PI * 2);
-  ctx.fillStyle = 'blue'; // Color azul para las gotas de lluvia
-  ctx.fill();
-  ctx.closePath();
-}
-
-function dibujarEscenario() {
-  // Limpiar el lienzo
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Dibujar una nube
-  ctx.beginPath();
-  ctx.arc(190, 100, 30, 0, Math.PI * 2);
-  ctx.arc(230, 100, 30, 0, Math.PI * 2);
-  ctx.arc(270, 100, 30, 0, Math.PI * 2);
-  ctx.arc(310, 100, 30, 0, Math.PI * 2);
-  ctx.arc(350, 100, 30, 0, Math.PI * 2);
-  ctx.arc(390, 100, 30, 0, Math.PI * 2);
-  ctx.fillStyle = 'grey';
-  ctx.fill();
-  ctx.closePath();
-
-  // Dibujar otra nube
-  ctx.beginPath();
-  ctx.arc(550, 150, 40, 0, Math.PI * 2);
-  ctx.arc(600, 150, 40, 0, Math.PI * 2);
-  ctx.arc(650, 150, 40, 0, Math.PI * 2);
-  ctx.arc(700, 150, 40, 0, Math.PI * 2);
-  ctx.fillStyle = 'grey';
-  ctx.fill();
-  ctx.closePath();
-
-  // Si el checkbox está marcado, dibujar la lluvia
-  if (document.getElementById('lluviaCheckbox').checked) {
-    // Dibujar gotas de lluvia azules debajo de la primera nube
-    for (let i = 0; i < 30; i++) {
-      let x = Math.random() * 160 + 160;
-      let y = Math.random() * 50 + 120;
-      dibujarGota(x, y);
-    }
-    // Dibujar gotas de lluvia azules debajo de la segunda nube
-    for (let i = 0; i < 30; i++) {
-      let x = Math.random() * 200 + 500;
-      let y = Math.random() * 50 + 170;
-      dibujarGota(x, y);
-    }
-  }
-}
-
-
 function dibujarEscenario() {
   // Dibujar una nube
   ctx.beginPath();
@@ -264,8 +212,8 @@ fireButton.addEventListener('click', () => {
   startTimer(); // Inicia el contador de tiempo
   disparado = true;
   setTimeout(() => {
-    sound.play();
-  }, 2000);
+    disparo.play();
+  }, 1000);
 });
 
 //-- Evento para el botón de inicio
