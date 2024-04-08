@@ -8,8 +8,8 @@ const resetButton = document.getElementById("reset");
 const AnguloValor = document.getElementById("valorangulo");
 const VelocidadValor = document.getElementById("valorvelocidad");
 const disparo = new Audio("flecha.mp3");
-const bing = new Audio("acierto.mp3");
-const impacto= new Audio("impacto.mp3");
+const bing = new Audio("acierto1.mp3");
+const impacto= new Audio("impacto1.mp3");
 
 
 //-- Definir el tamaño del canvas
