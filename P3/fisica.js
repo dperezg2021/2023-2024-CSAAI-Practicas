@@ -14,7 +14,7 @@ canvas.height = 400;
 //-- Obtener el contexto del canvas
 const ctx = canvas.getContext("2d");
 let xposicion = 20;
-let yposicion = canvas.height - 50; // Ajustamos la posición inicial del cuadrado más arriba
+let yposicion = canvas.height - 50; 
 let velx = 0;
 let vely = 0;
 let aciertos = 0;
@@ -27,17 +27,12 @@ let disparado = false;
 var colorMarronOscuro = '#654321';
 var nuevaPosicionX = generarPosicionXAleatoria();
 
-velocityInput.addEventListener('input', () => {
-  VelocidadValor.textContent = velocityInput.value;
-  velocityInput.value = velocityInput.value; // Actualizar el valor del slider
-
+angleInput.addEventListener('input', function() {
+  AnguloValor.textContent = this.value;
 });
 
-
-angleInput.addEventListener('input', () => {
-  AnguloValor.textContent = angleInput.value;
-  angleInput.value = angleInput.value; // Actualizar el valor del slider
-
+velocityInput.addEventListener('input', function() {
+  VelocidadValor.textContent = this.value;
 });
 
 function startTimer() {
@@ -60,8 +55,8 @@ function generarPosicionXAleatoria() {
 
 //-- Función para reiniciar la animación
 function resetAnimation() {
-  xposicion = 20; // Restaurado a la esquina inferior izquierda
-  yposicion = canvas.height - 50; // Restaurado a la esquina inferior izquierda
+  xposicion = 20; 
+  yposicion = canvas.height - 50; 
   flightTime = 0;
   timerDisplay.textContent = flightTime;
   stopTimer();
@@ -260,15 +255,13 @@ fireButton.addEventListener('click', () => {
   launchAngle = parseFloat(angleInput.value);
   initialVelocity = parseFloat(velocityInput.value);
   velx = initialVelocity * Math.cos((launchAngle * Math.PI) / 180)
-  //console.log(initialVelocity);
-  //console.log(launchAngle);
-  vely = initialVelocity * Math.cos((launchAngle * Math.PI) / 180)
+  vely = initialVelocity * Math.sin((launchAngle * Math.PI) / 180)
   startTimer(); // Inicia el contador de tiempo
   disparado = true;
 });
 
 //-- Evento para el botón de inicio
-resetButton.addEventListener('click', () => {
+resetButton.addEventListener('click', () => {     
   resetAnimation();
   resultDisplay.textContent = '';
   disparado = false;
@@ -413,13 +406,10 @@ function update() {
   } else if (!detectarColision() && velx === 0 && vely === 0 && disparado) {
       resultDisplay.textContent = '¡Fallaste!';
       stopTimer(); // Detener el contador de tiempo
-      // Restablecer la bandera si no hubo colisión
   }
   
-  //-- 6) Volver a ejecutar update cuando toque
   requestAnimationFrame(update);
 }
 
-//-- ¡Que empiece la función!
 update(); 
 
