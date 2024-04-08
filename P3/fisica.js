@@ -7,6 +7,11 @@ const fireButton = document.getElementById("fire");
 const resetButton = document.getElementById("reset");
 const AnguloValor = document.getElementById("valorangulo");
 const VelocidadValor = document.getElementById("valorvelocidad");
+const disparo = new Audio("flecha.mp3");
+const bing = new Audio("acierto.mp3");
+const impacto= new Audio("impacto.mp3");
+
+
 //-- Definir el tamaño del canvas
 canvas.width = 900;
 canvas.height = 400;
@@ -258,6 +263,7 @@ fireButton.addEventListener('click', () => {
   vely = initialVelocity * Math.sin((launchAngle * Math.PI) / 180)
   startTimer(); // Inicia el contador de tiempo
   disparado = true;
+  disparo.play();
 });
 
 //-- Evento para el botón de inicio
@@ -402,6 +408,8 @@ function update() {
     velx = 0; // Detener el movimiento horizontal
     vely = 0; // Detener el movimiento vertical
     dibujarConfeti(nuevaPosicionX, canvas.height - 33);
+    impacto.play();
+    bing.play();
     return;
   } else if (!detectarColision() && velx === 0 && vely === 0 && disparado) {
       resultDisplay.textContent = '¡Fallaste!';
