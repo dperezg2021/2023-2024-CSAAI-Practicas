@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory</title>
+    <link rel="stylesheet" href="memory.css" />
+    <script src="memory.js" defer></script>
+</head>
+<body>
+  <div class="game">
+    <div class="display">
+      <div id="mensaje"></div>
+      <div class="movimientos">Movimientos: 0</div>
+      <div class="timer">Tiempo: 0 s</div>
+    </div>
+    <div class="contenedor-juego">
+
+
+      <div class="contenedor-botones">
+        <div class="dificultad">
+            <button id="facil">FACIL</button><br>
+            <button id="medio">MEDIO</button><br>
+            <button id="dificil">DIFICIL</button><br>  
+        </div>
+        <div class="controles">
+            <button id="comenzar">COMENZAR</button>
+            <button id="reiniciar">REINICIAR</button> 
+        </div>
+    </div>
+    
+      <div class="tablero-container">
+        <!-- Aquí va tu tablero de juego -->
+        <div class="tablero" grid-dimension="0"></div>
+        <div class="win"></div>
+    </div>
+  </div>
+</body>
+</html>
+    
+
+
