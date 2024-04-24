@@ -74,6 +74,10 @@ button#reiniciar:hover {
 
 .contenedor-juego {
     display: flex;
+    width: 900px; /* Ancho fijo del contenedor de botones */
+
+
+
 
 
 }
