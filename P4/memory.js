@@ -1,5 +1,5 @@
 const selectors = {
-    gridContainer: document.querySelector('.grid-container'),
+    tableroContainer: document.querySelector('.tablero-container'),
     get tablero() { return document.querySelector('.tablero'); },
     movimientos: document.querySelector('.movimientos'),
     timer: document.querySelector('.timer'),
@@ -7,6 +7,8 @@ const selectors = {
     reiniciar: document.querySelector('#reiniciar'),
     win: document.querySelector('.win')
 }
+const resultDisplay = document.getElementById("result");
+
 
 
 const state = {
@@ -17,34 +19,6 @@ const state = {
     loop: null
 }
 
-selectors.reiniciar.addEventListener('click', function() {
-    // Reinicia el estado del juego
-    state.gameStarted = false;
-    console.log("funciona")
-    state.flippedCards = 0;
-    state.totalFlips = 0;
-    state.totalTime = 0;
-    state.loop = null;
-
-    // Aquí puedes agregar más lógica para reiniciar la interfaz del juego
-    // Por ejemplo, puedes reiniciar el tablero, el temporizador, los movimientos, etc.
-});
-
-
-document.getElementById('facil').addEventListener('click', function() {
-    document.querySelector('.tablero').setAttribute('grid-dimension', '2');
-    generateGame();
-});
-
-document.getElementById('medio').addEventListener('click', function() {
-    document.querySelector('.tablero').setAttribute('grid-dimension', '4');
-    generateGame();
-});
-
-document.getElementById('dificil').addEventListener('click', function() {
-    document.querySelector('.tablero').setAttribute('grid-dimension', '6');
-    generateGame();
-});
 
 const generateGame = () => {
     const dimensions = selectors.tablero.getAttribute('grid-dimension');
@@ -126,50 +100,49 @@ const startGame = () => {
         state.totalTime++
 
         selectors.movimientos.innerText = `${state.totalFlips} movimientos`
-        selectors.timer.innerText = `tiempo: ${state.totalTime} sec`
+        selectors.timer.innerText = `tiempo: ${state.totalTime} s`
     }, 1000)
 }
 
 const flipCard = card => {
-    state.flippedCards++
-    state.totalFlips++
+    state.flippedCards++;
+    state.totalFlips++;
 
     if (!state.gameStarted) {
-        startGame()
+        startGame();
     }
 
     if (state.flippedCards <= 2) {
-        card.classList.add('flipped')
+        card.classList.add('flipped');
     }
 
     if (state.flippedCards === 2) {
 
-        const flippedCards = document.querySelectorAll('.flipped:not(.matched)')
+        const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
         if (flippedCards[0].innerText === flippedCards[1].innerText) {
-            flippedCards[0].classList.add('matched')
-            flippedCards[1].classList.add('matched')
+            flippedCards[0].classList.add('matched');
+            flippedCards[1].classList.add('matched');
+            checkMatch(); // Llama a la función para comprobar los aciertos
         }
 
-
         setTimeout(() => {
-            flipBackCards()
-        }, 1000)
+            flipBackCards();
+            handleVictory();
+        }, 1000);
     }
 
-    if (!document.querySelectorAll('.card:not(.flipped)').length) {
-        setTimeout(() => {
-            selectors.gridContainer.classList.add('flipped')
-            selectors.win.innerHTML = `
-                <span class="win-text">
-                    ¡Has ganado!<br />
-                    con <span class="highlight">${state.totalFlips}</span> movimientos<br />
-                    en un tiempo de <span class="highlight">${state.totalTime}</span> segundos
-                </span>
-            `
-            clearInterval(state.loop)
-        }, 1000)
+    handleVictory(); 
+};
+
+const checkMatch = () => {
+    const matchedCards = document.querySelectorAll('.matched');
+    if (matchedCards.length === selectors.tablero.children.length) {
+        // Todas las cartas han sido emparejadas
+        console.log("Todas las cartas han sido emparejadas");
     }
-}
+};
+
+
 
 
 const flipBackCards = () => {
@@ -179,3 +152,55 @@ const flipBackCards = () => {
     })
     state.flippedCards = 0
 }
+
+const handleVictory = () => {
+    if (!document.querySelectorAll('.card:not(.matched)').length) {
+        console.log("Entró en la función de victoria");
+        selectors.tableroContainer.classList.add('flipped');
+        resultDisplay.textContent = `
+        ✨¡Has ganado!✨
+            con ${state.totalFlips} movimientos
+            en un tiempo de ${state.totalTime} segundos ✨
+      
+    `;
+        clearInterval(state.loop);
+    }
+};
+
+const initGame = () => {
+    generateGame();
+    attachEventListeners();
+};
+
+// Llamamos a initGame al principio para configurar el juego
+initGame();
+
+// También llamamos a initGame después de reiniciar el juego
+selectors.reiniciar.addEventListener('click', function() {
+    state.gameStarted = false;
+    state.flippedCards = 0;
+    state.totalFlips = 0;
+    state.totalTime = 0;
+    state.loop = null;
+    resultDisplay.textContent = ``;
+    initGame(); // Llamamos a initGame aquí
+});
+
+// Llamamos a initGame después de seleccionar una dificultad
+document.getElementById('facil').addEventListener('click', function() {
+    document.querySelector('.tablero').setAttribute('grid-dimension', '2');
+    resultDisplay.textContent = ``; 
+    initGame(); // Llamamos a initGame aquí
+});
+
+document.getElementById('medio').addEventListener('click', function() {
+    document.querySelector('.tablero').setAttribute('grid-dimension', '4');
+    resultDisplay.textContent = ``;
+    initGame(); // Llamamos a initGame aquí
+});
+
+document.getElementById('dificil').addEventListener('click', function() {
+    document.querySelector('.tablero').setAttribute('grid-dimension', '6');
+    resultDisplay.textContent = ``;
+    initGame(); // Llamamos a initGame aquí
+});
