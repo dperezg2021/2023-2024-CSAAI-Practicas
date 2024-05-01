@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: #FFF;
+}
+
+html {
+    background-image: url('internet.jpg');
+    background-size: cover; /* Para cubrir todo el fondo */
+    background-repeat: no-repeat; /* Para evitar la repetición de la imagen */
+}
+
+canvas {
+    border: 1px solid black;
+    background-color: rgb(171, 208, 223);
+    display: block; /* Asegurarse de que el lienzo ocupe todo el ancho disponible */
+    margin: 40px auto 0; /* 40px de margen superior y centrado horizontal */
+}
+
+.controls {
+    text-align: center; /* Alinear los botones al centro */
+    margin-top: 20px; /* Espacio entre el lienzo y los botones */
+}
+
+.controls button {
+    background: #282A3A;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 10px 20px;
+    border: 0;
+    cursor: pointer;
+    font-family: Fredoka;
+    font-size: 18pt;
+}
+
+#info {
+    margin-top: 20px;
+    color: #FFF;
+}
+
+#info p {
+    margin: 5px;
+    font-family: Fredoka;
+    color: #e5e8e9; /* Cambia el color del texto a un tono oscuro */
+    font-size: 29px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Agrega sombra de texto para hacerlo destacar */
+}
+.nodo-ruta-minima {
+    fill: green; /* Cambia el color de relleno a verde */
+    stroke: black; /* Mantén el borde negro */
+}
+
