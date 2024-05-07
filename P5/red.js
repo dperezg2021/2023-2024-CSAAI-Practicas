@@ -18,6 +18,8 @@ const btnMinPath = document.getElementById("btnMinPath");
 const numNodosDisplay = document.getElementById("numNodos");
 
 
+
+
 // Clase para representar un nodo en el grafo
 class Nodo {
 
@@ -249,30 +251,45 @@ numNodosDisplay.textContent = "Número de nodos: " + numNodos;
 
 // Función de callback para generar la red de manera aleatoria
 btnCNet.onclick = () => {
-  // Establecer el número de nodos en 5
-  numNodos = 5;
+  // Mostrar el mensaje "Generando red"
+  document.getElementById("mensaje").textContent = "Generando red...";
 
-  // Generar red de nodos con congestión creada de manera aleatoria redAleatoria
-  redAleatoria = crearRedAleatoriaConCongestion(numNodos, nodeConnect);
+  // Reproducir el audio de "red.mp3"
+  const audio = document.getElementById('audioRed');
+  audio.play();
 
-  // Limpiar el canvas
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  // Esperar 5 segundos antes de generar la red
+  setTimeout(() => {
+    // Establecer el número de nodos en 5
+    numNodos = 5;
 
-  // Dibujar la red que hemos generado
-  drawNet(redAleatoria);
-  document.getElementById("mensaje").textContent = "Red generada correctamente";
+    // Generar red de nodos con congestión creada de manera aleatoria redAleatoria
+    redAleatoria = crearRedAleatoriaConCongestion(numNodos, nodeConnect);
 
-  // Actualizar el número de nodos en el DOM
-  actualizarNumNodosDisplay();
+    // Limpiar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Dibujar la red que hemos generado
+    drawNet(redAleatoria);
+
+    // Mostrar mensaje de red generada correctamente
+    document.getElementById("mensaje").textContent = "Red generada correctamente";
+
+    // Actualizar el número de nodos en el DOM
+    actualizarNumNodosDisplay();
+  }, 5000); // 5000 milisegundos = 5 segundos
 };
+
 
 btnMinPath.onclick = () => {
   if (!redAleatoria) {
       // Mostrar mensaje de que la red no está generada y salir de la función
       document.getElementById("mensaje").textContent = "Debes generar la red primero";
+      mostrarErrorRedNoGenerada();
       return;
   }
-
+  const audio = document.getElementById('audioBoton');
+  audio.play();
   // Supongamos que tienes una red de nodos llamada redAleatoria
   // Calcula la ruta mínima entre el nodo inicial 0 y el nodo final 4
   const nodoOrigen = redAleatoria[0];
@@ -300,3 +317,26 @@ btnMinPath.onclick = () => {
 document.getElementById("tiempoEnvio").textContent = "Tiempo de envío: " + tiempoTotal.toFixed(3) + " ms";
 
 };
+
+function mostrarErrorRedNoGenerada() {
+  const audio = document.getElementById('audioError');
+  audio.play();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = '24px Arial';
+  ctx.fillStyle = 'red';
+  ctx.textAlign = 'center'; 
+  ctx.textBaseline = 'bottom'; 
+  ctx.fillText('¡Debes generar la red primero!', canvas.width / 2, canvas.height); 
+
+  const img = new Image();
+  img.onload = function() {
+    const nuevoAncho = img.width * 0.5; 
+    const nuevoAlto = img.height * 0.5; 
+    const x = (canvas.width - nuevoAncho) / 2;
+    const y = (canvas.height - nuevoAlto) / 2;
+    ctx.drawImage(img, x, y, nuevoAncho, nuevoAlto);
+  };
+
+  img.src = 'error.png'; 
+}

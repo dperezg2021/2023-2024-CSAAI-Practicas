@@ -17,12 +17,15 @@
         <canvas id="networkCanvas" width="800" height="400"></canvas>
     </div>
     <div class="controls">
-        <button id="btnCNet">Generar Red</button>
-        <button id="btnMinPath">Calcular ruta</button>
+        <audio id="audioError" src="Error.mp3"></audio>
+        <audio id="audioBoton" src="boton.mp3"></audio>
+        <audio id="audioRed" src="red.mp3"></audio>
+        <button id="btnCNet" class="glow-text">Generar Red</button>
+        <button id="btnMinPath" class="glow-text">Calcular ruta</button>
         <div id="info">
-            <p id="numNodos">Número de nodos: </p>
-            <p id="tiempoEnvio">Tiempo de envío: 0 ms</p>
-            <p id="mensaje"></p>
+            <p id="numNodos" class="chase-text">Número de nodos: </p>
+            <p id="tiempoEnvio" class="chase-text">Tiempo de envío: 0 ms</p>
+            <p id="mensaje" class="chase-text"></p>
         </div>
     </div>  
 </body>

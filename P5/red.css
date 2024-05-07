@@ -22,6 +22,34 @@ canvas {
     margin-top: 20px; /* Espacio entre el lienzo y los botones */
 }
 
+@keyframes glowing {
+    0% { color: #FFFFFF; } /* Blanco */
+    50% { color: #ADD8E6; } /* Azul claro */
+    100% { color: #FFFFFF; } /* Blanco */
+}
+
+@keyframes chase {
+    0% {
+        text-shadow: 0 0 10px #FFFFFF; /* Blanco */
+    }
+    50% {
+        text-shadow: 10px 10px 10px #ADD8E6; /* Azul */
+    }
+    100% {
+        text-shadow: 0 0 10px #FFFFFF; /* Blanco */
+    }
+}
+
+.glow-text {
+    animation: glowing 2s infinite alternate;
+}
+.chase-text {
+    animation: chase 2s infinite alternate;
+}
+
+
+
+/* Estilo para los botones */
 .controls button {
     background: #282A3A;
     color: #FFF;
@@ -32,19 +60,23 @@ canvas {
     font-family: Fredoka;
     font-size: 18pt;
 }
-
 #info {
     margin-top: 20px;
     color: #FFF;
+    background-color: rgba(0, 0, 255, 0.5); /* Fondo azul semitransparente */
+    padding: 10px; /* Espacio entre el texto y el borde */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Sombreado */
 }
 
 #info p {
     margin: 5px;
     font-family: Fredoka;
-    color: #e5e8e9; /* Cambia el color del texto a un tono oscuro */
+    color: #e5e8e9; /* Color del texto */
     font-size: 29px;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Agrega sombra de texto para hacerlo destacar */
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5); /* Sombreado del texto */
 }
+
 .nodo-ruta-minima {
     fill: green; /* Cambia el color de relleno a verde */
     stroke: black; /* Mantén el borde negro */
