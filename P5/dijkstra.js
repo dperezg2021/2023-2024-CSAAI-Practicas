@@ -52,11 +52,6 @@ function dijkstraConRetardos(red, origen) {
   }
   rutaMinima.unshift(origen.id);
 
-  // Marcar los nodos de la ruta mínima con color verde
-  for (const nodoId of rutaMinima) {
-    red[nodoId].color = 'green';
-  }
-
   // Devolver la ruta mínima como una lista de nodos y el tiempo total
   return { rutaMinima: rutaMinima.map(id => red.find(nodo => nodo.id === id)), tiempoTotal };
 }

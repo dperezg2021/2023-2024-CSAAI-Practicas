@@ -7,7 +7,6 @@ let nodoOrigen = 0, nodoDestino = 0;
 let rutaMinimaConRetardos;
 let numNodos = 0;
 
-console.log(numNodos);
 const nodeConnect = 2;
 const nodeRadius = 40;
 const nodeRandomDelay = 1000;
@@ -166,21 +165,7 @@ function crearRedAleatoriaConCongestion(numNodos, numConexiones) {
       nodos.push(new Nodo(i, x, y, delay)); // Generar un nuevo nodo y añadirlo a la lista de nodos de la red
     }
   
-    // Conectamos los nodos
-  // Conectamos los nodos
-//   for (let i = 0; i < numNodos; i++) {
-//     nodoActual = nodos[i];
-//     for (let j = 0; j < numConexiones; j++) {
-//       pickNode = Math.floor(Math.random() * numNodos);
-//       nodoAleatorio = nodos[pickNode];
-//       //peso = Math.random() * pipeRandomWeight; // Peso aleatorio para simular la distancia entre nodos
-//       peso = pipeRandomWeight; // El mismo peso para todas las conexiones
-//       nodoActual.conectar(nodoAleatorio, peso);
-//     }
-//   }
-
   for (let nodo of nodos) {
-    //console.log("id: " + nodo.id + " distancia al nodo: " + nodo.node_distance(nodos[0].x, nodos[0].y));
  
      const clonedArray = [...nodos];
  
@@ -221,41 +206,42 @@ function generarRetardo() {
 
 // Dibujar la red en el canvas
 function drawNet(nnodes) {
-    // Dibujamos las conexiones entre nodos
-    nnodes.forEach(nodo => {
-      nodo.conexiones.forEach(({ nodo: conexion, peso }) => {
-        ctx.beginPath();
-        ctx.moveTo(nodo.x, nodo.y);
-        ctx.lineTo(conexion.x, conexion.y);
-        ctx.stroke();
-  
-        ctx.font = '12px Arial';
-        ctx.fillStyle = 'black';
-        ctx.textAlign = 'center';
-        pw = "N" + nodo.id + " pw " + peso;
-        const midX = Math.floor((nodo.x + conexion.x)/2);
-        const midY = Math.floor((nodo.y + conexion.y)/2);
-        ctx.fillText(pw, midX, midY);  
-  
-      });
-    });
-  
-    let nodoDesc; // Descripción del nodo
-  
-    // Dibujamos los nodos
-    nnodes.forEach(nodo => {
+  // Dibujamos las conexiones entre nodos
+  nnodes.forEach(nodo => {
+    nodo.conexiones.forEach(({ nodo: conexion, peso }) => {
       ctx.beginPath();
-      ctx.arc(nodo.x, nodo.y, nodeRadius, 0, 2 * Math.PI);
-      ctx.fillStyle = 'blue';
-      ctx.fill();
+      ctx.moveTo(nodo.x, nodo.y);
+      ctx.lineTo(conexion.x, conexion.y);
       ctx.stroke();
+
       ctx.font = '12px Arial';
-      ctx.fillStyle = 'white';
+      ctx.fillStyle = 'black';
       ctx.textAlign = 'center';
-      nodoDesc = "N" + nodo.id + " delay " + Math.floor(nodo.delay);
-      ctx.fillText(nodoDesc, nodo.x, nodo.y + 5);
+      pw = "N" + nodo.id + " pw " + peso;
+      const midX = Math.floor((nodo.x + conexion.x)/2);
+      const midY = Math.floor((nodo.y + conexion.y)/2);
+      ctx.fillText(pw, midX, midY);  
+
     });
+  });
+
+  let nodoDesc; // Descripción del nodo
+
+  // Dibujamos los nodos
+  nnodes.forEach(nodo => {
+    ctx.beginPath();
+    ctx.arc(nodo.x, nodo.y, nodeRadius, 0, 2 * Math.PI);
+    ctx.fillStyle = nodo.color || 'blue'; // Utilizamos el color del nodo o azul por defecto
+    ctx.fill();
+    ctx.stroke();
+    ctx.font = '12px Arial';
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    nodoDesc = "N" + nodo.id + " delay " + Math.floor(nodo.delay);
+    ctx.fillText(nodoDesc, nodo.x, nodo.y + 5);
+  });
 }
+
 
 function actualizarNumNodosDisplay() {
 numNodosDisplay.textContent = "Número de nodos: " + numNodos;
@@ -263,8 +249,8 @@ numNodosDisplay.textContent = "Número de nodos: " + numNodos;
 
 // Función de callback para generar la red de manera aleatoria
 btnCNet.onclick = () => {
-  // Obtener el valor seleccionado en el slider
-  numNodos = parseInt(sliderNumNodos.value);
+  // Establecer el número de nodos en 5
+  numNodos = 5;
 
   // Generar red de nodos con congestión creada de manera aleatoria redAleatoria
   redAleatoria = crearRedAleatoriaConCongestion(numNodos, nodeConnect);
@@ -280,26 +266,37 @@ btnCNet.onclick = () => {
   actualizarNumNodosDisplay();
 };
 
-// Evento para actualizar el valor mostrado al cambiar el slider
-sliderNumNodos.addEventListener('input', function() {
-  outputNumNodos.textContent = this.value;
-});
-
 btnMinPath.onclick = () => {
-    if (!redAleatoria) {
-        // Mostrar mensaje de que la red no está generada y salir de la función
-        document.getElementById("mensaje").textContent = "Debes generar la red primero";
-        return;
-    }
+  if (!redAleatoria) {
+      // Mostrar mensaje de que la red no está generada y salir de la función
+      document.getElementById("mensaje").textContent = "Debes generar la red primero";
+      return;
+  }
 
-    // Supongamos que tienes una red de nodos llamada redAleatoria y tienes nodos origen y destino
-    nodoOrigen = redAleatoria[0]; // Nodo de origen
-    nodoDestino = redAleatoria[numNodos - 1]; // Nodo de destino
-  
-    // Calcular la ruta mínima entre el nodo origen y el nodo destino utilizando Dijkstra con retrasos
-    rutaMinimaConRetardos = dijkstraConRetardos(redAleatoria, nodoOrigen, nodoDestino);
-    console.log("Ruta mínima con retrasos:", rutaMinimaConRetardos);
-  
-}
+  // Supongamos que tienes una red de nodos llamada redAleatoria
+  // Calcula la ruta mínima entre el nodo inicial 0 y el nodo final 4
+  const nodoOrigen = redAleatoria[0];
+  const nodoDestino = redAleatoria[4];
+  const rutaMinimaConRetardos = dijkstraConRetardos(redAleatoria, nodoOrigen);
 
-  
+  // Calcula el tiempo total de retardo
+  let tiempoTotal = 0;
+
+  // Marca los nodos de la ruta mínima en verde mientras se calcula
+  for (const nodo of rutaMinimaConRetardos.rutaMinima) {
+      nodo.color = 'green';
+      tiempoTotal += nodo.delay;
+  }
+
+  // Muestra la ruta mínima y el tiempo total en la consola
+  console.log("Ruta mínima:", rutaMinimaConRetardos.rutaMinima);
+  console.log("Tiempo total de retardo:", tiempoTotal, "ms");
+
+  // Redibujar la red con los nodos actualizados
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawNet(redAleatoria);
+
+// Mostrar el tiempo total de retardo en el display con solo tres decimales
+document.getElementById("tiempoEnvio").textContent = "Tiempo de envío: " + tiempoTotal.toFixed(3) + " ms";
+
+};
