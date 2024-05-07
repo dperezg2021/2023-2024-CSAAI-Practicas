@@ -253,7 +253,8 @@ numNodosDisplay.textContent = "Número de nodos: " + numNodos;
 btnCNet.onclick = () => {
   // Mostrar el mensaje "Generando red"
   document.getElementById("mensaje").textContent = "Generando red...";
-
+let tiempoTotal = 0;
+ctx.clearRect(0, 0, canvas.width, canvas.height);
   // Reproducir el audio de "red.mp3"
   const audio = document.getElementById('audioRed');
   audio.play();
