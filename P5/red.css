@@ -79,6 +79,19 @@ canvas {
     fill: green; 
     stroke: black; 
 }
+@media only screen and (max-width: 600px) {
+    canvas {
+        width: 80%; /* Reducir el ancho del canvas */
+        height: auto; /* Permitir que la altura se ajuste automáticamente */
+    }
 
 
+    .controls button {
+        font-size: 12pt; /* Reducción adicional del tamaño de la fuente para pantallas pequeñas */
+        padding: 8px 12px; /* Reducción adicional del padding para pantallas pequeñas */
+    }
 
+    #info p {
+        font-size: 14px; /* Reducción adicional del tamaño de la fuente para pantallas pequeñas */
+    }
+}
