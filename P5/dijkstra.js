@@ -41,7 +41,7 @@ function dijkstraConRetardos(red, origen) {
 
   // Reconstruir la ruta mínima desde el nodo destino hasta el nodo origen
   const rutaMinima = [];
-  let nodoActual = red.length - 1; // Nodo final
+  let nodoActual = red.length - 1; 
 
   let tiempoTotal = 0; // Tiempo total
 
