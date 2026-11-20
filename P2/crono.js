@@ -26,7 +26,7 @@ class Crono {
 
         //-- 60 segundos hacen un minuto
         if (this.seg == 60) {
-        this.min = 1;
+        this.min += 1;
         this.seg = 0;
         }
 
@@ -55,6 +55,7 @@ class Crono {
 
     //-- Reset del cronómetro
     reset() {
+        this.stop();
         this.cent = 0;
         this.seg = 0;
         this.min = 0;
