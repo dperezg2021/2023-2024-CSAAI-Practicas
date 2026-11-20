@@ -9,18 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const display = document.getElementById('display');
 
-  const botones = [
-    document.getElementById('boton0'),
-    document.getElementById('boton1'),
-    document.getElementById('boton2'),
-    document.getElementById('boton3'),
-    document.getElementById('boton4'),
-    document.getElementById('boton5'),
-    document.getElementById('boton6'),
-    document.getElementById('boton7'),
-    document.getElementById('boton8'),
-    document.getElementById('boton9')
-  ];
+  const botones = Array.from(
+    { length: 10 },
+    (_, i) => document.getElementById(`boton${i}`)
+  );
 
   const casillas = [
     document.getElementById('n1'),
@@ -29,29 +21,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('n4')
   ];
 
+  const botonStart = document.getElementById('start');
   const botonStop = document.getElementById('stop');
   const botonReset = document.getElementById('reset');
 
-  // Comprobar que existen todos los elementos
+  const resultado = document.getElementById('resultado');
+
+  // Comprobar elementos necesarios
   if (
     !display ||
-    botones.some(boton => !boton) ||
-    casillas.some(casilla => !casilla) ||
+    botones.some(b => !b) ||
+    casillas.some(c => !c) ||
+    !botonStart ||
     !botonStop ||
     !botonReset
   ) {
-    console.error('Error: faltan elementos HTML del juego.');
+    console.error('BOOM: faltan elementos HTML.');
     return;
   }
 
-  // Comprobar que existe la clase Crono
   if (typeof Crono !== 'function') {
-    console.error('No se ha encontrado la clase Crono.');
+    console.error('BOOM: no se ha cargado la clase Crono.');
     return;
   }
 
   // ==========================================
-  // 2. CONFIGURACIÓN
+  // 2. VARIABLES DEL JUEGO
   // ==========================================
 
   const crono = new Crono(display);
@@ -64,19 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let cronometroActivo = false;
 
+  let juegoIniciado = false;
+
   // ==========================================
   // 3. GENERAR CLAVE ALEATORIA
   // ==========================================
 
   function generarClave() {
 
-    // Crear los diez dígitos disponibles
     const digitos = [
       '0', '1', '2', '3', '4',
       '5', '6', '7', '8', '9'
     ];
 
-    // Barajar los dígitos mediante Fisher-Yates
+    // Algoritmo Fisher-Yates
     for (let i = digitos.length - 1; i > 0; i--) {
 
       const j = Math.floor(Math.random() * (i + 1));
@@ -85,7 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
         [digitos[j], digitos[i]];
     }
 
-    // Seleccionar cuatro dígitos diferentes
     return digitos.slice(0, 4).join('');
   }
 
@@ -120,75 +115,85 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. COMPROBAR CLAVE
+  // 6. INICIAR PARTIDA
+  // ==========================================
+
+  function iniciarJuego() {
+
+    if (juegoTerminado || juegoIniciado) {
+      return;
+    }
+
+    juegoIniciado = true;
+
+    iniciarCronometro();
+
+    if (resultado) {
+      resultado.textContent = '¡Busca la clave!';
+    }
+  }
+
+  // ==========================================
+  // 7. COMPROBAR CLAVE
   // ==========================================
 
   function comprobarClave() {
 
-    const claveResuelta = casillas.every(
+    const acertada = casillas.every(
       (casilla, index) =>
         casilla.textContent === clave[index]
     );
 
-    if (claveResuelta) {
+    if (acertada) {
 
       juegoTerminado = true;
 
       detenerCronometro();
 
-      // Deshabilitar todos los botones numéricos
       botones.forEach(boton => {
         boton.disabled = true;
       });
 
-      console.log('¡Clave descubierta!');
-
-      // Mostrar mensaje si existe un elemento de resultado
-      const resultado = document.getElementById('resultado');
-
       if (resultado) {
         resultado.textContent =
-          '¡Enhorabuena! Has descubierto la clave.';
+          '¡BOOM! ¡Has descubierto la clave!';
       }
+
+      console.log('Clave descubierta correctamente.');
     }
 
-    return claveResuelta;
+    return acertada;
   }
 
   // ==========================================
-  // 7. ASIGNAR NÚMERO
+  // 8. INTRODUCIR NÚMEROS
   // ==========================================
 
-  function asignarNumero(elemento) {
+  function asignarNumero(boton) {
 
-    if (juegoTerminado) {
+    if (juegoTerminado || !juegoIniciado) {
       return;
     }
 
-    const numero = elemento.value;
+    const numero = boton.value;
 
-    // Validar que sea un único dígito
     if (!/^\d$/.test(numero)) {
       return;
     }
 
-    // Evitar introducir el mismo número varias veces
+    // Evitar números repetidos
     if (numerosIntroducidos.has(numero)) {
       return;
     }
 
-    // Registrar el número introducido
     numerosIntroducidos.add(numero);
 
-    // Deshabilitar el botón utilizado
-    elemento.disabled = true;
-
-    // Iniciar el cronómetro
-    iniciarCronometro();
+    // Desactivar botón utilizado
+    boton.disabled = true;
 
     let encontrado = false;
 
-    // Buscar el número en la clave
+    // Comprobar posición del número
     for (let i = 0; i < clave.length; i++) {
 
       if (clave[i] === numero) {
@@ -201,53 +206,56 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Comprobar si se ha descubierto la clave
     if (comprobarClave()) {
       return;
     }
 
-    // Opcional: mostrar información sobre el intento
-    const resultado = document.getElementById('resultado');
-
     if (resultado) {
 
       resultado.textContent = encontrado
-        ? '¡Número correcto!'
-        : 'El número no pertenece a la clave.';
+        ? '¡Número encontrado!'
+        : 'Número incorrecto. Sigue intentando.';
     }
   }
 
   // ==========================================
-  // 8. ASIGNAR EVENTOS A LOS BOTONES
+  // 9. EVENTOS DE LOS BOTONES NUMÉRICOS
   // ==========================================
 
   botones.forEach(boton => {
 
-    boton.addEventListener('click', function () {
-
-      asignarNumero(this);
-
+    boton.addEventListener('click', () => {
+      asignarNumero(boton);
     });
 
   });
 
   // ==========================================
-  // 9. BOTÓN STOP
+  // 10. BOTÓN START
+  // ==========================================
+
+  botonStart.addEventListener('click', iniciarJuego);
+
+  // ==========================================
+  // 11. BOTÓN STOP
   // ==========================================
 
   botonStop.addEventListener('click', () => {
 
     detenerCronometro();
 
+    if (resultado && !juegoTerminado) {
+      resultado.textContent = 'Cronómetro detenido.';
+    }
+
   });
 
   // ==========================================
-  // 10. REINICIAR PARTIDA
+  // 12. BOTÓN RESET
   // ==========================================
 
   function reiniciarJuego() {
 
-    // Reiniciar cronómetro
     detenerCronometro();
 
     crono.reset();
@@ -255,15 +263,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Generar una nueva clave
     clave = generarClave();
 
-    // Limpiar números introducidos
+    // Limpiar intentos
     numerosIntroducidos.clear();
 
     // Restablecer estados
     juegoTerminado = false;
 
+    juegoIniciado = false;
+
     cronometroActivo = false;
 
-    // Limpiar casillas
+    // Restablecer casillas
     casillas.forEach(casilla => {
 
       casilla.textContent = '*';
@@ -272,18 +282,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    // Reactivar botones numéricos
+    // Reactivar botones
     botones.forEach(boton => {
-
       boton.disabled = false;
-
     });
 
-    // Limpiar mensajes
-    const resultado = document.getElementById('resultado');
-
+    // Limpiar resultado
     if (resultado) {
-      resultado.textContent = '';
+      resultado.textContent = 'Pulsa Start para comenzar.';
     }
 
   }
@@ -291,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
   botonReset.addEventListener('click', reiniciarJuego);
 
   // ==========================================
-  // 11. INICIALIZACIÓN
+  // 13. INICIALIZACIÓN
   // ==========================================
 
   reiniciarJuego();
