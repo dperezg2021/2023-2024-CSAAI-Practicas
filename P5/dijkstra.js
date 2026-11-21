@@ -1,57 +1,84 @@
+function dijkstraWithDelays(network, sourceNode, targetNode) {
+    const distances = {};
+    const previous = {};
+    const unvisited = new Set();
+    const nodeMap = new Map();
 
-function dijkstraConRetardos(red, origen) {
-  const distancia = {}; // Almacena la distancia mínima desde el nodo origen hasta cada nodo
-  const anterior = {}; // Almacena el nodo anterior en la ruta mínima desde el nodo origen hasta cada nodo
-  const nodosNoVisitados = new Set(); // Conjunto de nodos no visitados
-
-  // Inicializar las distancias a cada nodo como infinito y el nodo anterior como null
-  for (const nodo of red) {
-    distancia[nodo.id] = Infinity;
-    anterior[nodo.id] = null;
-    nodosNoVisitados.add(nodo.id);
-  }
-
-  // La distancia al nodo origen es 0
-  distancia[origen.id] = 0;
-
-  while (nodosNoVisitados.size > 0) {
-    // Encontrar el nodo no visitado con la distancia mínima
-    let nodoActual = null;
-    for (const nodoId of nodosNoVisitados) {
-      if (nodoActual === null || distancia[nodoId] < distancia[nodoActual]) {
-        nodoActual = nodoId;
-      }
+    for (const node of network) {
+        distances[node.id] = Infinity;
+        previous[node.id] = null;
+        unvisited.add(node.id);
+        nodeMap.set(node.id, node);
     }
 
-    // Si no se encuentra un nodo actual, salir del bucle
-    if (nodoActual === null) break;
+    distances[sourceNode.id] = 0;
 
-    nodosNoVisitados.delete(nodoActual); // Marcar el nodo actual como visitado
+    while (unvisited.size > 0) {
+        let currentId = null;
 
-    // Actualizar las distancias a los nodos adyacentes al nodo actual
-    const auxNode = red[nodoActual];
-    for (const { nodo, peso } of auxNode.conexiones) {
-      const distanciaTotal = distancia[nodoActual] + peso + nodo.delay; // Considerar el retardo en el procesamiento del nodo
-      if (distanciaTotal < distancia[nodo.id]) {
-        distancia[nodo.id] = distanciaTotal;
-        anterior[nodo.id] = nodoActual;
-      }
+        for (const nodeId of unvisited) {
+            if (currentId === null || distances[nodeId] < distances[currentId]) {
+                currentId = nodeId;
+            }
+        }
+
+        if (currentId === null || distances[currentId] === Infinity) {
+            break;
+        }
+
+        if (currentId === targetNode.id) {
+            break;
+        }
+
+        unvisited.delete(currentId);
+        const currentNode = nodeMap.get(currentId);
+
+        for (const { node: neighbor, weight } of currentNode.connections) {
+            if (!unvisited.has(neighbor.id)) {
+                continue;
+            }
+
+            const candidateDistance = distances[currentId] + weight + neighbor.delay;
+            if (candidateDistance < distances[neighbor.id]) {
+                distances[neighbor.id] = candidateDistance;
+                previous[neighbor.id] = currentId;
+            }
+        }
     }
-  }
 
-  // Reconstruir la ruta mínima desde el nodo destino hasta el nodo origen
-  const rutaMinima = [];
-  let nodoActual = red.length - 1; 
+    const shortestPath = [];
+    let traceId = targetNode.id;
 
-  let tiempoTotal = 0; // Tiempo total
+    if (distances[targetNode.id] === Infinity) {
+        return { shortestPath: [], totalTime: Infinity };
+    }
 
-  while (anterior[nodoActual] !== null) {
-    rutaMinima.unshift(nodoActual);
-    tiempoTotal += red[nodoActual].delay; // Sumar el retardo de cada nodo
-    nodoActual = anterior[nodoActual];
-  }
-  rutaMinima.unshift(origen.id);
+    while (traceId !== null) {
+        shortestPath.unshift(nodeMap.get(traceId));
+        traceId = previous[traceId];
+    }
 
-  // Devolver la ruta mínima como una lista de nodos y el tiempo total
-  return { rutaMinima: rutaMinima.map(id => red.find(nodo => nodo.id === id)), tiempoTotal };
+    return {
+        shortestPath,
+        totalTime: distances[targetNode.id]
+    };
+}
+
+function calculatePathTime(path) {
+    if (!path || path.length < 2) {
+        return 0;
+    }
+
+    let totalTime = 0;
+    for (let i = 1; i < path.length; i++) {
+        const prevNode = path[i - 1];
+        const currNode = path[i];
+        const edge = prevNode.connections.find(conn => conn.node.id === currNode.id);
+        if (!edge) {
+            return Infinity;
+        }
+        totalTime += edge.weight + currNode.delay;
+    }
+
+    return totalTime;
 }
