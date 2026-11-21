@@ -1,31 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulación de envío de paquetes de datos</title>
-
-    <link rel="stylesheet" href="red.css">
-
+    <link rel="stylesheet" href="styles.css">
     <script src="dijkstra.js" defer></script>
-    <script src="red.js" defer></script>
-
+    <script src="network.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <canvas id="networkCanvas" width="800" height="400"></canvas>
-    </div>
-    <div class="controls">
-        <audio id="audioError" src="Error.mp3"></audio>
-        <audio id="audioBoton" src="boton.mp3"></audio>
-        <audio id="audioRed" src="red.mp3"></audio>
-        <button id="btnCNet" class="glow-text">Generar Red</button>
-        <button id="btnMinPath" class="glow-text">Calcular ruta</button>
-        <div id="info">
-            <p id="numNodos" class="chase-text">Número de nodos: </p>
-            <p id="tiempoEnvio" class="chase-text">Tiempo de envío: 0 ms</p>
-            <p id="mensaje" class="chase-text"></p>
+    <main class="app-container">
+        <header class="game-header">
+            <h1>Enrutamiento de Paquetes</h1>
+            <p class="subtitle">Haz clic en los nodos conectados para trazar la ruta más rápida desde <strong>N0</strong> hasta el destino.</p>
+        </header>
+
+        <div class="canvas-wrapper">
+            <canvas id="networkCanvas" width="860" height="440"></canvas>
         </div>
-    </div>  
+
+        <section class="controls">
+            <audio id="audioError" src="Error.mp3" preload="none"></audio>
+            <audio id="audioButton" src="boton.mp3" preload="none"></audio>
+            <audio id="audioNetwork" src="red.mp3" preload="none"></audio>
+
+            <div class="button-group">
+                <label for="nodeCountSelect" class="select-label">
+                    Nodos:
+                    <select id="nodeCountSelect">
+                        <option value="5" selected>5 (Fácil)</option>
+                        <option value="7">7 (Medio)</option>
+                        <option value="9">9 (Difícil)</option>
+                    </select>
+                </label>
+                <button id="generateBtn" class="btn primary glow-text">Generar Red</button>
+                <button id="resetPathBtn" class="btn secondary">Reiniciar Ruta</button>
+                <button id="calculateBtn" class="btn accent glow-text">Comparar con Dijkstra</button>
+            </div>
+
+            <div id="infoPanel" class="info-panel">
+                <div class="metrics-row">
+                    <p id="nodeCountDisplay" class="metric">Nodos: 0</p>
+                    <p id="playerTimeDisplay" class="metric player">Tu ruta: -- ms</p>
+                    <p id="optimalTimeDisplay" class="metric optimal">Ruta óptima: -- ms</p>
+                </div>
+                <p id="statusMessage" class="status-message">Pulsa "Generar Red" para comenzar.</p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
