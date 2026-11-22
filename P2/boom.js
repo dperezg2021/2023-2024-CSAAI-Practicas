@@ -60,22 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (typeof timer.start === 'function') {
-      timer.start();
-    } else if (typeof timer.arrancar === 'function') {
-      timer.arrancar();
-    }
-
+    timer.start();
     isTimerRunning = true;
   }
 
   function stopTimer() {
-    if (typeof timer.stop === 'function') {
-      timer.stop();
-    } else if (typeof timer.parar === 'function') {
-      timer.parar();
-    }
-
+    timer.stop();
     isTimerRunning = false;
   }
 
@@ -156,12 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetGame() {
     stopTimer();
-
-    if (typeof timer.reset === 'function') {
-      timer.reset();
-    } else if (typeof timer.reiniciar === 'function') {
-      timer.reiniciar();
-    }
+    timer.reset();
 
     secretCode = generateCode();
     guessedDigits.clear();
