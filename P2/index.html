@@ -4,62 +4,82 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BOOM // EOD Terminal</title>
+  <title>BOOM // C4 Unit</title>
   <link rel="stylesheet" href="BOOM.css">
   <script src="crono.js" defer></script>
   <script src="boom.js" defer></script>
 </head>
 <body>
-  <div id="container" class="bomb-unit">
-    <div class="hazard-bar"></div>
-
-    <div class="unit-header">
-      <span class="unit-id">EOD // MK-IV</span>
-      <span class="unit-led"></span>
+  <div id="container" class="bomb-pack">
+    <div class="c4-strap top">
+      <span>EXPLOSIVE // C4-MK4</span>
+      <span class="led-dot"></span>
     </div>
 
-    <div class="screen-housing">
-      <div class="code-row">
-        <div class="digit-box"><p class="asterisco" id="n1">*</p></div>
-        <div class="digit-box"><p class="asterisco" id="n2">*</p></div>
-        <div class="digit-box"><p class="asterisco" id="n3">*</p></div>
-        <div class="digit-box"><p class="asterisco" id="n4">*</p></div>
-      </div>
+    <div class="detonator-module">
+      <div class="hazard-line"></div>
 
-      <div class="chrono-box">
-        <p id="display">0:0:0</p>
-      </div>
+      <table class="bomb-table">
+        <tr>
+          <td colspan="3" class="screen-cell">
+            <div class="code-strip">
+              <span class="asterisco" id="n1">*</span>
+              <span class="asterisco" id="n2">*</span>
+              <span class="asterisco" id="n3">*</span>
+              <span class="asterisco" id="n4">*</span>
+            </div>
+          </td>
+        </tr>
 
-      <div class="status-box">
-        <p id="resultado">Pulsa Start para comenzar.</p>
-      </div>
+        <tr>
+          <td colspan="3" class="screen-cell">
+            <p id="display">0:0:0</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3" class="status-cell">
+            <p id="resultado">Pulsa Start para comenzar.</p>
+          </td>
+        </tr>
+
+        <tr>
+          <td><button type="button" id="boton1" value="1" class="numberButton">1</button></td>
+          <td><button type="button" id="boton2" value="2" class="numberButton">2</button></td>
+          <td><button type="button" id="boton3" value="3" class="numberButton">3</button></td>
+        </tr>
+
+        <tr>
+          <td><button type="button" id="boton4" value="4" class="numberButton">4</button></td>
+          <td><button type="button" id="boton5" value="5" class="numberButton">5</button></td>
+          <td><button type="button" id="boton6" value="6" class="numberButton">6</button></td>
+        </tr>
+
+        <tr>
+          <td><button type="button" id="boton7" value="7" class="numberButton">7</button></td>
+          <td><button type="button" id="boton8" value="8" class="numberButton">8</button></td>
+          <td><button type="button" id="boton9" value="9" class="numberButton">9</button></td>
+        </tr>
+
+        <tr>
+          <td><div class="dead-key"></div></td>
+          <td><button type="button" id="boton0" value="0" class="numberButton">0</button></td>
+          <td><div class="dead-key"></div></td>
+        </tr>
+
+        <tr>
+          <td><button type="button" id="start" class="numberButton ctrl-btn">Start</button></td>
+          <td><button type="button" id="stop" class="numberButton ctrl-btn">Stop</button></td>
+          <td><button type="button" id="reset" class="numberButton ctrl-btn">Reset</button></td>
+        </tr>
+      </table>
+
+      <div class="hazard-line"></div>
     </div>
 
-    <div class="keypad-housing">
-      <div class="num-grid">
-        <button type="button" id="boton1" value="1" class="numberButton">1</button>
-        <button type="button" id="boton2" value="2" class="numberButton">2</button>
-        <button type="button" id="boton3" value="3" class="numberButton">3</button>
-
-        <button type="button" id="boton4" value="4" class="numberButton">4</button>
-        <button type="button" id="boton5" value="5" class="numberButton">5</button>
-        <button type="button" id="boton6" value="6" class="numberButton">6</button>
-
-        <button type="button" id="boton7" value="7" class="numberButton">7</button>
-        <button type="button" id="boton8" value="8" class="numberButton">8</button>
-        <button type="button" id="boton9" value="9" class="numberButton">9</button>
-
-        <div class="blank-key"></div>
-        <button type="button" id="boton0" value="0" class="numberButton">0</button>
-        <div class="blank-key"></div>
-
-        <button type="button" id="start" class="numberButton action-key">Start</button>
-        <button type="button" id="stop" class="numberButton action-key">Stop</button>
-        <button type="button" id="reset" class="numberButton action-key">Reset</button>
-      </div>
+    <div class="c4-strap bottom">
+      <span>ARMED // 4-DIGIT LOCK</span>
     </div>
-
-    <div class="hazard-bar"></div>
   </div>
 </body>
 </html>
