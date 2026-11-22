@@ -1,184 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Share+Tech+Mono&display=swap');
 
-.button-container {
-    display: grid;
-    grid-template-columns: repeat(3, auto); /* Crea tres columnas automáticas */
-    grid-gap: 5px; /* Espacio entre los botones */
-    justify-content: center; /* Centra el contenido horizontalmente */
+:root {
+  --olive-dark: #1d2219;
+  --olive-mid: #2c3526;
+  --olive-light: #43503b;
+  --metal-dark: #121511;
+  --metal-border: #55634b;
+  --screen-bg: #080c08;
+  --neon-red: #ff2a2a;
+  --neon-green: #4dff6b;
+  --amber-glow: #ffb020;
+  --text-light: #dce3d5;
 }
 
-/* Estilo para centrar el contenido de los elementos p */
-p {
-    color: rgb(255, 255, 255); /* Color del texto */
-    text-align: center; /* Alineación del texto */
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-image: url('camuflash.jpeg'); /* Ruta de la imagen de fondo */
-    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centrar la imagen */
-    background-repeat: no-repeat; /* No repetir la imagen */
-}
-/*estilo de botones*/
-.numberButton,
-#start,
-#stop,
-#reset {
-    width: 90px; /* Ancho fijo para todos los botones */
-    height: 90px; /* Altura de cada botón */
-    background-color: #555; /* Color de fondo */
-    border: none; /* Sin borde */
-    color: rgb(255, 255, 255); /* Color del texto */
-    text-align: center; /* Alineación del texto */
-    text-decoration: none; /* Sin decoración de texto */
-    display: inline-block; /* Mostrar como un bloque en línea */
-    font-size: 16px; /* Tamaño de fuente */
-    cursor: pointer; /* Cursor al pasar por encima */
-    border-radius: 8px; /* Radio de borde */
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* Difuminado */
-    transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: 'Chakra Petch', sans-serif;
+  background-color: #0e110c;
+  background-image:
+    radial-gradient(circle at center, rgba(10, 14, 9, 0.45) 0%, rgba(5, 7, 4, 0.92) 100%),
+    url('camuflash.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-light);
 }
 
-/* Estilo cuando ratón  encima */
-.numberButton:hover,
-#start:hover,
-#stop:hover,
-#reset:hover {
-    background-color: #333;
+.tactical-case {
+  position: relative;
+  width: 100%;
+  max-width: 390px;
+  background: linear-gradient(145deg, var(--olive-mid), var(--olive-dark));
+  border: 3px solid var(--metal-border);
+  border-radius: 10px;
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 0 25px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
 }
 
-/* Estilo cuando se hace click */
-.numberButton:active,
-#start:active,
-#stop:active,
-#reset:active {
-    background-color: #222;
+.tactical-case::before,
+.tactical-case::after {
+  content: '';
+  position: absolute;
+  top: 22px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #7a8771, #1a1f16);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
 }
 
-
-/* Estilos para la tabla */
-table {
-    width: 100%; /* Ajusta el ancho de la tabla al 100% del contenedor */
-    border-collapse: collapse; /* Combina los bordes de las celdas */
-    background-color: #4d4545; /* Color de fondo de la tabla */
+.tactical-case::before {
+  left: 12px;
 }
 
-/* Estilos para las celdas de la tabla */
-td {
-    padding: 8px; /* Espaciado interno de las celdas */
-    border: 2px solid #000000; /* Borde de las celdas */
-    text-align: center; /* Centra el contenido de las celdas */
+.tactical-case::after {
+  right: 12px;
 }
 
-/* Estilos para las filas impares de la tabla */
-tr:nth-child(odd) {
-    background-color: #837b7b; /* Color de fondo de las filas impares */
+.hazard-strip {
+  height: 10px;
+  width: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    #d49b17,
+    #d49b17 10px,
+    #141612 10px,
+    #141612 20px
+  );
+  border-bottom: 1px solid #000;
 }
 
-/* Estilos para las filas pares de la tabla */
-tr:nth-child(even) {
-    background-color: #837b7b; /* Color de fondo de las filas pares */
+.hazard-strip.bottom {
+  border-bottom: none;
+  border-top: 1px solid #000;
 }
 
-
-.button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.device-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 32px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.numberButton {
-    width: 90px; /* Ajusta el tamaño deseado */
-    height: 90px; /* Ajusta el tamaño deseado */
+.serial-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  color: #9aa88f;
 }
 
-.border-container {
-    border: 2px solid black; /* Borde sólido de 2px en color negro */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Radio de borde */
-    display: inline-block; /* Para que el contenedor se ajuste al contenido */
+.status-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--neon-red);
+  box-shadow: 0 0 8px var(--neon-red);
+  animation: pulse-led 1.5s infinite alternate;
+}
+
+@keyframes pulse-led {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.readout-panel {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.code-display {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  background-color: var(--screen-bg);
+  padding: 12px;
+  border-radius: 6px;
+  border: 2px solid #050705;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.9);
+}
+
+.digit-slot {
+  background: linear-gradient(180deg, #111811 0%, #090d09 100%);
+  border: 1px solid #243022;
+  border-radius: 4px;
+  height: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .asterisco {
-    font-size: 30px;
-    text-align: center;
-    color: red; /* Set the initial color for asterisks */
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.1rem;
+  color: var(--neon-red);
+  text-shadow: 0 0 10px rgba(255, 42, 42, 0.75);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
 .correct-guess {
-    color: rgb(103, 182, 103); /* Color del acierto */
-    font-size: 30px;
+  color: var(--neon-green);
+  text-shadow: 0 0 12px rgba(77, 255, 107, 0.85);
+}
+
+.timer-display {
+  background-color: var(--screen-bg);
+  border: 2px solid #050705;
+  border-radius: 6px;
+  padding: 10px 14px;
+  text-align: center;
+  box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.9);
+  position: relative;
+}
+
+.lcd-label {
+  display: block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  color: #5c6e58;
+  margin-bottom: 2px;
 }
 
 #display {
-    color: red; /* Color del texto en rojo */
-    font-size: 30px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2.3rem;
+  letter-spacing: 3px;
+  color: var(--neon-red);
+  text-shadow: 0 0 12px rgba(255, 42, 42, 0.75);
 }
 
+.status-console {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #0b0f0a;
+  border: 1px solid #2a3526;
+  border-left: 3px solid var(--amber-glow);
+  border-radius: 4px;
+  padding: 8px 12px;
+  min-height: 38px;
+}
+
+.console-prefix {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--amber-glow);
+  font-size: 0.9rem;
+}
+
+#resultado {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.88rem;
+  color: var(--amber-glow);
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+.button-container {
+  padding: 4px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.keypad-spacer {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.numberButton {
+  width: 100%;
+  height: 58px;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #e6ede0;
+  background: linear-gradient(180deg, #4b5842 0%, #313b2b 100%);
+  border: 1px solid #161b13;
+  border-top: 1px solid #6c7d60;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow:
+    0 4px 0 #141811,
+    0 6px 10px rgba(0, 0, 0, 0.45);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.2s ease, opacity 0.2s ease;
+}
+
+.numberButton:hover:not(:disabled) {
+  background: linear-gradient(180deg, #58674e 0%, #3b4634 100%);
+  color: #ffffff;
+}
+
+.numberButton:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow:
+    0 1px 0 #141811,
+    0 2px 4px rgba(0, 0, 0, 0.45);
+}
+
+.numberButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #141811;
+}
+
+.control-btn {
+  height: 46px;
+  font-size: 0.9rem;
+  letter-spacing: 1.5px;
+}
+
+#start {
+  background: linear-gradient(180deg, #2e6b3e 0%, #1d4728 100%);
+  border-top-color: #46965b;
+}
+
+#start:hover:not(:disabled) {
+  background: linear-gradient(180deg, #377f4a 0%, #245732 100%);
+}
+
+#stop {
+  background: linear-gradient(180deg, #8a2c2c 0%, #5c1b1b 100%);
+  border-top-color: #b84242;
+}
+
+#stop:hover:not(:disabled) {
+  background: linear-gradient(180deg, #a33434 0%, #702121 100%);
+}
+
+#reset {
+  background: linear-gradient(180deg, #7a5c22 0%, #523d15 100%);
+  border-top-color: #a67f33;
+}
+
+#reset:hover:not(:disabled) {
+  background: linear-gradient(180deg, #94702a 0%, #664c1a 100%);
+}
 
 #audioContainer {
-    position: fixed; /* Posicionamiento fijo */
-    bottom: 20px; /* Distancia desde la parte inferior */
-    right: 20px; /* Distancia desde la parte derecha */
-    padding: 5px; /* Espaciado interno */
-    border-radius: 4px; /* Radio de borde */
-    z-index: 999; /* Asegura que esté por encima de otros elementos */
-    background-color: #555; /* Color de fondo */
-    text-align: center;
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 999;
+  background: rgba(24, 29, 21, 0.92);
+  border: 1px solid var(--metal-border);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  text-align: center;
 }
 
-/* Estilo para el botón de audio */
+#audioContainer p {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  color: #9aa88f;
+  margin-bottom: 6px;
+}
+
 #audioContainer audio {
-    width: 80px; /* Ancho del botón de audio */
-    height: 30px; /* Altura del botón de audio */
-    background-color: #555; /* Color de fondo */
-    border: none; /* Sin borde */
-    color: white; /* Color del texto */
-    font-size: 7px; /* Tamaño de la fuente */
-    cursor: pointer; /* Cursor al pasar por encima */
-    border-radius: 15px; /* Radio de borde */
+  width: 190px;
+  height: 28px;
+  filter: invert(90%) hue-rotate(65deg) contrast(95%);
 }
-
-/* Estilo para el botón de audio al pasar el ratón */
-#audioContainer audio:hover {
-    background-color: #333; /* Cambia el color de fondo al pasar el ratón */
-}
-
-/* Estilo para el botón de audio al hacer clic */
-#audioContainer audio:active {
-    background-color: #222; /* Cambia el color de fondo al hacer clic */
-}
-
 
 @media screen and (max-width: 600px) {
-    #container {
-        padding: 10px; /* Reducir el espaciado interno en pantallas pequeñas */
-    }
+  body {
+    flex-direction: column;
+    gap: 16px;
+  }
 
-    .numberButton,
-    #start,
-    #stop,
-    #reset {
-        width: 45%; /* Ajustar el ancho de los botones en pantallas pequeñas */
-    }
+  #audioContainer {
+    position: static;
+    width: 100%;
+    max-width: 390px;
+  }
 
-    #audioContainer {
-        position: relative; /* Cambia el posicionamiento a relativo en pantallas pequeñas */
-        bottom: auto; /* Elimina la distancia desde la parte inferior */
-        right: auto; /* Elimina la distancia desde la parte derecha */
-        max-height: 150px; /* Altura máxima del contenedor de audio */
-        overflow-y: auto; /* Agrega desplazamiento vertical si el contenido excede la altura máxima */
-        padding: 5px; /* Ajusta el espaciado interno */
-    }
-
-    #audioContainer audio {
-        width: 70px; /* Ancho del elemento de audio al 100% del contenedor */
-        height: auto; /* Altura automática para mantener la proporción */
-        font-size: 10px; /* Tamaño de la fuente ajustado */
-    }
+  #audioContainer audio {
+    width: 100%;
+  }
 }
