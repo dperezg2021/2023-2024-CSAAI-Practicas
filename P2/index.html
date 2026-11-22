@@ -1,80 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOOM</title>
-    <!-- Hoja de estilo -->
-    <link rel="stylesheet" href="BOOM.css">
-
-    <script src="crono.js" defer></script>
-    <script src="boom.js" defer></script>
-
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BOOM // EOD Terminal</title>
+  <link rel="stylesheet" href="BOOM.css">
+  <script src="crono.js" defer></script>
+  <script src="boom.js" defer></script>
 </head>
-
 <body>
-  <div id="container">
+  <main id="container" class="tactical-case">
+    <div class="hazard-strip top"></div>
 
-    <table>
+    <header class="device-header">
+      <div class="serial-tag">UNIT // MK-IV EOD</div>
+      <div class="status-led" aria-hidden="true"></div>
+    </header>
 
+    <section class="readout-panel">
+      <div class="code-display" aria-label="Código secreto">
+        <div class="digit-slot"><p class="asterisco" id="n1">*</p></div>
+        <div class="digit-slot"><p class="asterisco" id="n2">*</p></div>
+        <div class="digit-slot"><p class="asterisco" id="n3">*</p></div>
+        <div class="digit-slot"><p class="asterisco" id="n4">*</p></div>
+      </div>
 
-      <tr>
-        <td><p class="asterisco" id="n1">*</p></td>
-        <td><p class="asterisco" id="n2">*</p></td>
-        <td><p class="asterisco" id="n3">*</p></td>
-        <td><p class="asterisco" id="n4">*</p></td>
-      </tr>
-      <tr>
-        <td colspan="4"><p id="display">0:0:0</p></td>
-      </tr>
-      <tr>
-        <td colspan="4">
-          <div class="button-container">
-            <table>
-              <tr>
-                  <td><button type="button" id="boton1" value="1" class="numberButton">1</button></td>
-                  <td><button type="button" id="boton2" value="2" class="numberButton">2</button></td>
-                  <td><button type="button" id="boton3" value="3" class="numberButton">3</button></td>
+      <div class="timer-display">
+        <span class="lcd-label">T-MINUS // CHRONO</span>
+        <p id="display">0:0:0</p>
+      </div>
 
-              </tr>
-              <tr>
-                <td><button type="button" id="boton4" value="4" class="numberButton">4</button></td>
-                <td><button type="button" id="boton5" value="5" class="numberButton">5</button></td>
-                <td><button type="button" id="boton6" value="6" class="numberButton">6</button></td>
-              </tr>
-              <tr>
-                <td><button type="button" id="boton7" value="7" class="numberButton">7</button></td>
-                <td><button type="button" id="boton8" value="8" class="numberButton">8</button></td>
-                <td><button type="button" id="boton9" value="9" class="numberButton">9</button></td>
-              </tr>
-              <tr>
-                  <td><button type="button" class="numberButton"></button></td>
-                  <td><button type="button" id="boton0" value="0" class="numberButton">0</button></td>
-                  <td><button type="button" class="numberButton"></button></td>
-              </tr>
-              <tr>
-                <td><button type="button" class="numberButton" id="start">Start</button></td>
-                <td><button type="button" class="numberButton" id="stop">Stop</button></td>
-                <td><button type="button" class="numberButton" id="reset">Reset</button></td>
-              </tr>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </table>
+      <div class="status-console">
+        <span class="console-prefix">&gt;_</span>
+        <p id="resultado">Pulsa Start para comenzar.</p>
+      </div>
+    </section>
 
-  </div>
+    <section class="button-container">
+      <div class="keypad-grid">
+        <button type="button" id="boton1" value="1" class="numberButton">1</button>
+        <button type="button" id="boton2" value="2" class="numberButton">2</button>
+        <button type="button" id="boton3" value="3" class="numberButton">3</button>
 
-  <div id="audioContainer">
-    
-    <p>Musica de ambiente</p>
+        <button type="button" id="boton4" value="4" class="numberButton">4</button>
+        <button type="button" id="boton5" value="5" class="numberButton">5</button>
+        <button type="button" id="boton6" value="6" class="numberButton">6</button>
+
+        <button type="button" id="boton7" value="7" class="numberButton">7</button>
+        <button type="button" id="boton8" value="8" class="numberButton">8</button>
+        <button type="button" id="boton9" value="9" class="numberButton">9</button>
+
+        <div class="keypad-spacer" aria-hidden="true"></div>
+        <button type="button" id="boton0" value="0" class="numberButton">0</button>
+        <div class="keypad-spacer" aria-hidden="true"></div>
+      </div>
+
+      <div class="control-grid">
+        <button type="button" class="numberButton control-btn" id="start">START</button>
+        <button type="button" class="numberButton control-btn" id="stop">STOP</button>
+        <button type="button" class="numberButton control-btn" id="reset">RESET</button>
+      </div>
+    </section>
+
+    <div class="hazard-strip bottom"></div>
+  </main>
+
+  <aside id="audioContainer">
+    <p>COMMS // AUDIO</p>
     <audio controls>
-        <source src="fondo.mp3" class="audio" type="audio/mpeg">
+      <source src="fondo.mp3" class="audio" type="audio/mpeg">
     </audio>
-  </div>
-  
-  <!-- JavaScript para controlar la música de fondo -->
+  </aside>
+
   <script src="background_music.js"></script>
 </body>
 </html>
