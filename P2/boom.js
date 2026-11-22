@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
     !stopButton ||
     !resetButton
   ) {
-    console.error('BOOM: faltan elementos HTML.');
+    console.error('Missing HTML elements.');
     return;
   }
 
   if (typeof Crono !== 'function') {
-    console.error('BOOM: no se ha cargado la clase Crono.');
+    console.error('Crono class not loaded.');
     return;
   }
 
@@ -60,12 +60,22 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    timer.start();
+    if (typeof timer.start === 'function') {
+      timer.start();
+    } else if (typeof timer.arrancar === 'function') {
+      timer.arrancar();
+    }
+
     isTimerRunning = true;
   }
 
   function stopTimer() {
-    timer.stop();
+    if (typeof timer.stop === 'function') {
+      timer.stop();
+    } else if (typeof timer.parar === 'function') {
+      timer.parar();
+    }
+
     isTimerRunning = false;
   }
 
@@ -83,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function checkCode() {
     const isSolved = digitSlots.every(
-      (slot, index) => slot.textContent === secretCode[index]
+      (slot, index) => slot.textContent.trim() === secretCode[index]
     );
 
     if (isSolved) {
@@ -94,6 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
         button.disabled = true;
       });
 
+      startButton.disabled = true;
+      stopButton.disabled = true;
+
       if (resultDisplay) {
         resultDisplay.textContent = '¡BOOM! ¡Has descubierto la clave!';
       }
@@ -103,8 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleDigitInput(button) {
-    if (isGameOver || !isTimerRunning) {
+    if (isGameOver) {
       return;
+    }
+
+    if (!isTimerRunning) {
+      startGame();
     }
 
     const digit = (button.value || button.textContent).trim();
@@ -139,11 +156,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function resetGame() {
     stopTimer();
-    timer.reset();
+
+    if (typeof timer.reset === 'function') {
+      timer.reset();
+    } else if (typeof timer.reiniciar === 'function') {
+      timer.reiniciar();
+    }
 
     secretCode = generateCode();
     guessedDigits.clear();
     isGameOver = false;
+    isTimerRunning = false;
 
     digitSlots.forEach(slot => {
       slot.textContent = '*';
@@ -153,6 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
     digitButtons.forEach(button => {
       button.disabled = false;
     });
+
+    startButton.disabled = false;
+    stopButton.disabled = false;
 
     if (resultDisplay) {
       resultDisplay.textContent = 'Pulsa Start para comenzar.';
