@@ -1,99 +1,288 @@
-/* https://www.w3schools.com/howto/howto_css_two_columns.asp */
-/* https://developer.mozilla.org/es/docs/Web/CSS/box-sizing */
-/* Así definimos el comportamiento de caja para todos los elementos */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+:root {
+    --bg-page: #f3f1ed;
+    --bg-sidebar: #1c1f26;
+    --bg-main: #ffffff;
+    --accent-primary: #d95d24;
+    --accent-secondary: #f28c38;
+    --text-light: #f4f4f6;
+    --text-muted-light: #b8bcc8;
+    --text-dark: #1e2025;
+    --text-muted-dark: #4b505c;
+    --border-light: #e6e2da;
+    --border-dark: rgba(255, 255, 255, 0.12);
+}
+
 * {
     box-sizing: border-box;
-  }
-  
-/* Crear columnas de ancho diferente que se colocan una a continuación de la otra */
-.columna {
-float: left;
-padding: 10px;
-min-height: 500px;
+    margin: 0;
+    padding: 0;
 }
 
-.izquierda {
-width: 25%;
-box-sizing: border-box;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding: 24px 16px 48px;
 }
 
-.derecha {
-width: 75%;
+.top-label {
+    max-width: 1120px;
+    margin: 0 auto 14px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted-dark);
 }
 
-/* Clear floats despues de las columnas para eliminar la superposición */
-.filla:after {
-content: "";
-display: table;
-clear: both;
+.cv-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 45px rgba(20, 22, 28, 0.12);
+    background-color: var(--bg-main);
 }
 
-#c1 {
-    background-color:#2874A6;
-    font-family:Arial, Helvetica, sans-serif;
-    color:#f0f0f0;
+.column {
+    padding: 40px 32px;
 }
 
-#c2 {
-    background-color:#AED6F1;
-    font-family:Arial, Helvetica, sans-serif;
-    color:#000000;
-    box-sizing: border-box;
+.left-column {
+    width: 34%;
+    background-color: var(--bg-sidebar);
+    color: var(--text-light);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
-/* estilos para imágenes https://www.w3schools.com/css/css3_images.asp */
-/* posicionamiento de imágenes https://www.w3schools.com/css/css_positioning.asp */
-
-img {
-    width: 60%;
-    height: auto;
-    display:block;
-    margin-bottom: 0 auto;
+.right-column {
+    width: 66%;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    padding: 44px 48px;
 }
 
+.centered {
+    text-align: center;
+}
 
+.section-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-secondary);
+}
 
-  
-/* Estilos para la barra de progreso */
-.barra-progreso {
-    height: 20px;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-      overflow: hidden;
-  }
-  
-.nivel {
+.subsection-heading {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-light);
+}
+
+.avatar-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 4px 0;
+}
+
+#profile-img {
+    width: 176px;
+    height: 176px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--accent-primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.bio-text {
+    text-align: justify;
+    font-size: 0.94rem;
+    color: var(--text-muted-light);
+}
+
+.divider {
+    border: none;
+    height: 1px;
+    width: 100%;
+}
+
+.dark-divider {
+    background-color: var(--border-dark);
+}
+
+.light-divider {
+    background-color: var(--border-light);
+    margin: 28px 0;
+}
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.skill-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.skill-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-light);
+    gap: 12px;
+}
+
+.skill-value {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-secondary);
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progress-fill {
     height: 100%;
-    background-color: #5B2C6F; /* MORADO */
-  }
-  
-ul.square-list li {
-    list-style-type: square;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 999px;
 }
 
-
-  /* Responsive layout - cuando el ancho de pantalla es menor a 600px, muestra las columnas apiladas. */
-/* Así conseguimos que el contenido se vea bien en dispositvos móviles */
-
-.iresponsive{
-  padding : 0 6px;
-  float: left;
-  width: 90%;
+.personal-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--accent-primary), #b84514);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 6px 16px rgba(217, 93, 36, 0.35);
 }
-@media screen and (max-width: 600px) {
-    .columna {
-      width: 100%;
+
+.personal-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(217, 93, 36, 0.45);
+}
+
+.contact-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.88rem;
+    color: var(--text-muted-light);
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border-dark);
+}
+
+.contact-list li {
+    word-break: break-word;
+}
+
+.cv-header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2.9rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 22px;
+    position: relative;
+    padding-bottom: 14px;
+}
+
+.cv-header h1::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 72px;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+}
+
+.hero-image-wrapper {
+    margin-bottom: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.cv-section h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-primary);
+    margin-bottom: 18px;
+}
+
+.timeline-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.timeline-list li {
+    position: relative;
+    padding: 14px 18px 14px 24px;
+    background-color: #faf9f6;
+    border: 1px solid var(--border-light);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 10px;
+    font-size: 0.96rem;
+    color: var(--text-dark);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.timeline-list li:hover {
+    transform: translateX(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+}
+
+@media screen and (max-width: 820px) {
+    .cv-container {
+        flex-direction: column;
     }
 
-    .iresponsive {
+    .left-column,
+    .right-column {
         width: 100%;
+        padding: 32px 24px;
     }
-  }
-.fila{
-    display:flex;
+
+    .cv-header h1 {
+        font-size: 2.2rem;
+    }
 }
-
-/* Más sobre diseño web responsive https://www.w3schools.com/css/css_rwd_intro.asp */
-
-
-
