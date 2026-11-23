@@ -1,94 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV Dos columnas</title>
-
-   <!-- Hoja de estilo -->
-   <link rel="stylesheet" href="2c-template.css">    
-
+    <link rel="stylesheet" href="2c-template.css">
 </head>
 <body>
-    
-<h2>Practica 1: Diseño de cv</h2>
-    <div class="fila">
-    <div id="c1" class="columna izquierda">
 
-        <h2 style="text-align:center;">Perfil</h2>
-        <div style="text-align: center;" class="responsive"></div>
-        <img id="img" src="ARCHIVOS/chicote.png" alt="chicote" width="200" height="200"
-            style="border-radius : 50%;">
+    <p class="top-label">Practica 1: Diseño de cv</p>
 
-        <p style ="text-align:justify;">Nacido en Madrid el 23 de junio de 1969, en el seno de una familia
-             de clase trabajadora que reside en el barrio de Carabanchel Alto. </p>
-        <hr>
-        <p style ="text-align:justify;">Amplia experiencia en cocina y con facilidad para adaptarse a
-             nuevos entornos y a nuevos sabores. Además de un amplio conocimiento de una gra variedad de alimentos.</p>
+    <div class="cv-container">
+        <aside id="sidebar" class="column left-column">
+            <h2 class="section-heading centered">Perfil</h2>
+            <div class="avatar-wrapper">
+                <img id="profile-img" src="ARCHIVOS/chicote.png" alt="chicote" width="200" height="200">
+            </div>
 
-        <hr>
-        <h3 style="text-align:center;">Competencias</h3>
-            <ul class="competencias">
-                <li class="competencia">
-                    <span>Gestión de cocina</span>
-                    <div class="barra-progreso">
-                        <div class="nivel" style="width: 100%;"></div>
+            <p class="bio-text">Nacido en Madrid el 23 de junio de 1969, en el seno de una familia de clase trabajadora que reside en el barrio de Carabanchel Alto.</p>
+            <hr class="divider dark-divider">
+            <p class="bio-text">Amplia experiencia en cocina y con facilidad para adaptarse a nuevos entornos y a nuevos sabores. Además de un amplio conocimiento de una gra variedad de alimentos.</p>
+
+            <hr class="divider dark-divider">
+            <h3 class="subsection-heading centered">Competencias</h3>
+            <ul class="skills-list">
+                <li class="skill-item">
+                    <div class="skill-header">
+                        <span>Gestión de cocina</span>
+                        <span class="skill-value">100%</span>
                     </div>
-                    <div class="texto-nivel">100%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
                 </li>
-                <li class="competencia">
-                    <span>Creatividad e innovación</span>
-                    <div class="barra-progreso">
-                        <div class="nivel" style="width: 90%;"></div>
+                <li class="skill-item">
+                    <div class="skill-header">
+                        <span>Creatividad e innovación</span>
+                        <span class="skill-value">90%</span>
                     </div>
-                    <div class="texto-nivel">90%</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 90%;"></div>
+                    </div>
                 </li>
-                <li class="competencia">
-                    <span>Higiene y manipulación segura de alimentos</span>
-                    <div class="barra-progreso">
-                        <div class="nivel" style="width: 100%;"></div>
+                <li class="skill-item">
+                    <div class="skill-header">
+                        <span>Higiene y manipulación segura de alimentos</span>
+                        <span class="skill-value">100%</span>
                     </div>
-                    <div class="texto-nivel">100%</div>
-                </li>        
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </li>
             </ul>
-        <hr>
 
-        <h3 style="text-align: center;"><a href="about.html">Pagina personal</a></h3>        
-        <ul>
-          <li>chicoteseestachiquito@penlc.es</li>
-          <li> C. del Duque de Sesto, 27, Salamanca, 28009 Madrid</li>
-          <li>+34 678258719</li>
-        </ul>
-    </div>
-    
+            <hr class="divider dark-divider">
 
+            <h3 class="subsection-heading centered">
+                <a class="personal-link" href="about.html">Pagina personal</a>
+            </h3>
+            <ul class="contact-list">
+                <li>chicoteseestachiquito@penlc.es</li>
+                <li>C. del Duque de Sesto, 27, Salamanca, 28009 Madrid</li>
+                <li>+34 678258719</li>
+            </ul>
+        </aside>
 
-    <div id="c2" class="columna derecha ">
-        <h1>Alberto Chicote</h1>
-        <img src="ARCHIVOS/comidita.jpg" alt="Comida" >
+        <main id="main-content" class="column right-column">
+            <header class="cv-header">
+                <h1>Alberto Chicote</h1>
+                <div class="hero-image-wrapper">
+                    <img src="ARCHIVOS/comidita.jpg" alt="Comida">
+                </div>
+            </header>
 
-        <h3>Formación</h3>
-        <ul class="square-list ">
-                <li>1994: Curso de cocina en Suiza</li>
-                <li>1987-1989: Escuela Superior de Hosteleria y Turismo de Madrid</li>
-        </ul>
+            <section class="cv-section">
+                <h3>Formación</h3>
+                <ul class="timeline-list">
+                    <li>1994: Curso de cocina en Suiza</li>
+                    <li>1987-1989: Escuela Superior de Hosteleria y Turismo de Madrid</li>
+                </ul>
+            </section>
 
+            <hr class="divider light-divider">
 
-        <hr>
-
-        <h3>Experiencia</h3> 
-        <ul class="square-list">
-            <li>Presentador y chef 2012-2023. Presentador y chef en el programa televisivo Pesadilla en la cocina, con experiencia en más de 80 restaurantes.</li>
-            <li>Chef.2005. Chef del restaurante Pan de Lujo, cocina alternativa.</li>           
-            <li>Chef.1999. Chef del restaurante Nodo, cocina fusión japonesa.</li>
-            <li >Cocinero.1995. Chef en El Cenachero, con reinterpretción de cocina andaluza. </li>
-            <li>Cocinero.1990. Cocinero en Lúculo, con Ange García.</li>
-        </ul> 
-        </div>      
+            <section class="cv-section">
+                <h3>Experiencia</h3>
+                <ul class="timeline-list">
+                    <li>Presentador y chef 2012-2023. Presentador y chef en el programa televisivo Pesadilla en la cocina, con experiencia en más de 80 restaurantes.</li>
+                    <li>Chef.2005. Chef del restaurante Pan de Lujo, cocina alternativa.</li>
+                    <li>Chef.1999. Chef del restaurante Nodo, cocina fusión japonesa.</li>
+                    <li>Cocinero.1995. Chef en El Cenachero, con reinterpretción de cocina andaluza.</li>
+                    <li>Cocinero.1990. Cocinero en Lúculo, con Ange García.</li>
+                </ul>
+            </section>
+        </main>
     </div>
 
 </body>
 </html>
-
-
