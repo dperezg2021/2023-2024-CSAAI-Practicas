@@ -1,73 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About my program</title>
-
-    <link rel="stylesheet" href="about.css">     
-
-
-
-
+    <link rel="stylesheet" href="about.css">
 </head>
 <body>
 
-    <header>
+    <header class="page-header">
         <h1>Mi programa de televisión</h1>
     </header>
 
-    <div id="contenido" class="iresponsive">
+    <main id="content-card" class="content-card">
         <h2>PESADILLA EN LA COCINA</h2>
-        <p style="text-align: justify;">En este programa me dedico a rescatar restaurantes en problemas, 
-            dignificar la profesión hostelera y ayudar a dueños y empleados a recuperar la pasión y el buen hacer en sala y fogones. He estado en más de 80 restaurantes diferentes donde he vivido todo tipo
-            de experiencias extravagantes.
-        </p>
-        <p><a href="https://www.atresplayer.com/lasexta/programas/pesadilla-en-la-cocina/" target=”_blank”> Ver programa</a></p> 
-        <img id="img" src="ARCHIVOS/pesadilla.jpeg" alt="Pesadilla" >
-        <p style="text-align: justify;">Algunas de mis frases más celebres son:</p>
-    </div>
+        <p class="description-text">En este programa me dedico a rescatar restaurantes en problemas, dignificar la profesión hostelera y ayudar a dueños y empleados a recuperar la pasión y el buen hacer en sala y fogones. He estado en más de 80 restaurantes diferentes donde he vivido todo tipo de experiencias extravagantes.</p>
 
-    <div id="table" class = "audio-table-container">
-        <table>
-            <TR>
-                <TD>Audio 1</TD>
-                <TD>Audio 2</TD>
-                <TD>Audio 3</TD>
-            </TR>
-        
-                <TR>
-                    <TD>
+        <div class="cta-wrapper">
+            <a class="cta-button" href="https://www.atresplayer.com/lasexta/programas/pesadilla-en-la-cocina/" target="_blank" rel="noopener noreferrer">Ver programa</a>
+        </div>
+
+        <div class="media-wrapper">
+            <img id="program-img" src="ARCHIVOS/pesadilla.jpeg" alt="Pesadilla">
+        </div>
+
+        <p class="quotes-intro">Algunas de mis frases más celebres son:</p>
+
+        <div id="audio-section" class="audio-table-container">
+            <table class="audio-table">
+                <tr>
+                    <td>Audio 1</td>
+                    <td>Audio 2</td>
+                    <td>Audio 3</td>
+                </tr>
+                <tr>
+                    <td>
                         <audio controls>
                             <source src="ARCHIVOS/hambre.mp3" type="audio/mpeg">
-                        </audio> 
-                    </TD>
-                    <TD>
+                        </audio>
+                    </td>
+                    <td>
                         <audio controls>
                             <source src="ARCHIVOS/yoli.mp3" type="audio/mpeg">
-                        </audio> 
-                    </TD>
-                    <TD>
+                        </audio>
+                    </td>
+                    <td>
                         <audio controls>
                             <source src="ARCHIVOS/despierta.mp3" type="audio/mpeg">
                         </audio>
-                    </TD>
-                </TR>
-        </table>
-          
-    </div>       
-    <p style="text-align: center;"><a href="index.html">Volver al CV</a></p>
-   
+                    </td>
+                </tr>
+            </table>
+        </div>
 
+        <div class="back-wrapper">
+            <a class="back-link" href="index.html">Volver al CV</a>
+        </div>
+    </main>
 
 </body>
 </html>
-
-
-
-    
-
-
-
-    
