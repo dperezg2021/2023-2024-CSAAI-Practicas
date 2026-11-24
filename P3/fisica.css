@@ -1,92 +1,126 @@
-/* Estilo del canvas */
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 24px;
+  min-height: 100vh;
+  background-image: url('tiro.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #1e293b;
+}
+
 canvas {
-  background-color: rgb(86, 167, 199);
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  border-radius: 5px;
+  display: block;
+  background-color: #72bce8;
+  border: 3px solid #2c3e50;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  margin-bottom: 18px;
 }
 
 .controls {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.controls button,
-.controls input[type="range"] {
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 900px;
+  padding: 18px 24px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .controls button {
-    display: inline-block;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .ranges {
   display: flex;
-  justify-content: normal;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 28px;
   width: 100%;
 }
-    
+
 .slider-container {
-  margin-right: 20px; /* Ajusta el margen horizontal según sea necesario */
   display: inline-block;
+  font-weight: 600;
+  color: #1e293b;
 }
 
 .slider-container input[type="range"] {
-  display: block; /* Hacer que el slider sea un bloque */
+  display: block;
+  width: 220px;
+  margin: 8px 0 4px;
+  accent-color: #2e7d32;
+  cursor: pointer;
 }
 
 .slider-container .slider-value {
-  display: block; /* Hacer que el valor del slider sea un bloque */
-  margin-top: 5px; /* Espacio entre el slider y su valor */
-}
-  
-.controls input[type="range"] {
-    width: 200px; /* Ajusta el ancho del rango según sea necesario */
+  display: inline-block;
+  margin-top: 2px;
+  padding: 2px 10px;
+  background-color: #e2e8f0;
+  border-radius: 6px;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 #valorangulo,
 #timer,
 #result {
-    display: inline-block;
-    margin-bottom: 10px;
+  display: inline-block;
+  font-weight: 700;
 }
 
-body {
-    background-image: url('tiro.jpeg'); /* Ruta de la imagen de fondo */
-    background-size: cover; /* Escalar la imagen para cubrir toda la pantalla */
-    background-position: center; /* Centrar la imagen */
-    background-repeat: no-repeat; /* No repetir la imagen */
+#result {
+  font-size: 1.1rem;
+  color: #15803d;
+}
+
+#fire,
+#reset {
+  color: #ffffff;
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s ease, background-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 #fire {
-    background-color: #e74c3c; /* Color rojizo */
-    color: white;
-    border: none;
-    border-radius: 50%; /* Forma circular */
-    padding: 15px 30px; /* Tamaño más grande */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #e74c3c;
 }
 
 #fire:hover {
-    background-color: #c0392b; /* Color rojizo más oscuro al pasar el mouse */
+  background-color: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(192, 57, 43, 0.4);
 }
 
 #reset {
-    background-color: #e08a27; /* Color rojizo */
-    color: white;
-    border: none;
-    border-radius: 50%; /* Forma circular */
-    padding: 15px 30px; /* Tamaño más grande */
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  background-color: #e08a27;
 }
 
 #reset:hover {
-    background-color: #7a6802; /* Color rojizo más oscuro al pasar el mouse */
+  background-color: #b86d16;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(184, 109, 22, 0.4);
+}
+
+#fire:active,
+#reset:active {
+  transform: translateY(0);
 }
