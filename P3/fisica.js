@@ -1,10 +1,5 @@
-
 (() => {
   'use strict';
-
-  // ==========================================
-  // 1. ELEMENTOS HTML
-  // ==========================================
 
   const canvas = document.getElementById('canvas');
 
@@ -37,10 +32,6 @@
     return;
   }
 
-  // ==========================================
-  // 2. CONFIGURACIÓN
-  // ==========================================
-
   canvas.width = 900;
   canvas.height = 400;
 
@@ -54,7 +45,6 @@
 
   const ARROW_COLOR = '#654321';
 
-  // Sonidos originales
   const audio = {
     shot: new Audio('flecha.mp3'),
     hit: new Audio('impacto1.mp3'),
@@ -65,40 +55,19 @@
     sound.preload = 'auto';
   });
 
-  // ==========================================
-  // 3. ESTADO DEL JUEGO
-  // ==========================================
-
   const state = {
     x: 20,
     y: HEIGHT - 50,
-
     vx: 0,
     vy: 0,
-
     hits: 0,
-
     targetX: randomTargetX(),
-
     phase: 'ready',
-
     shotStartedAt: 0,
     elapsed: 0,
-
     lastFrameAt: 0,
-
     confetti: []
   };
-
-  // Estados posibles:
-  // ready  = preparado
-  // flying = flecha en movimiento
-  // hit    = acierto
-  // miss   = fallo
-
-  // ==========================================
-  // 4. FUNCIONES AUXILIARES
-  // ==========================================
 
   function randomTargetX() {
     const margin = TARGET_RADIUS + 10;
@@ -119,7 +88,6 @@
       if (promise && promise.catch) {
         promise.catch(() => {});
       }
-
     } catch (error) {
       console.warn('Error reproduciendo sonido:', error);
     }
@@ -146,22 +114,14 @@
     }
   }
 
-  // ==========================================
-  // 5. REINICIAR JUEGO
-  // ==========================================
-
   function resetShot() {
     state.x = 20;
     state.y = HEIGHT - 50;
-
     state.vx = 0;
     state.vy = 0;
-
     state.elapsed = 0;
     state.shotStartedAt = 0;
-
     state.phase = 'ready';
-
     state.confetti.length = 0;
 
     updateTimer();
@@ -169,7 +129,6 @@
 
   function resetGame() {
     resetShot();
-
     state.targetX = randomTargetX();
 
     if (resultDisplay) {
@@ -177,13 +136,7 @@
     }
   }
 
-  // ==========================================
-  // 6. DISPARAR
-  // ==========================================
-
   function fire() {
-
-    // Evitar disparos simultáneos
     if (state.phase === 'flying') {
       return;
     }
@@ -204,20 +157,13 @@
       return;
     }
 
-    // Conversión de grados a radianes
     const radians = angle * Math.PI / 180;
-
-    // Velocidad expresada en unidades por segundo.
-    // Se conserva la escala aproximada del juego original.
     const speed = velocity * 60;
 
     state.vx = speed * Math.cos(radians);
     state.vy = speed * Math.sin(radians);
-
     state.elapsed = 0;
-
     state.shotStartedAt = performance.now();
-
     state.phase = 'flying';
 
     if (resultDisplay) {
@@ -227,12 +173,7 @@
     playSound(audio.shot);
   }
 
-  // ==========================================
-  // 7. DETECTAR COLISIONES
-  // ==========================================
-
   function checkCollision() {
-
     const tipX = state.x + ARROW_LENGTH;
     const tipY = state.y + 20;
 
@@ -244,12 +185,7 @@
     return distanceSquared <= TARGET_RADIUS * TARGET_RADIUS;
   }
 
-  // ==========================================
-  // 8. FINALIZAR DISPARO
-  // ==========================================
-
   function finishShot(wasHit) {
-
     if (state.phase !== 'flying') {
       return;
     }
@@ -257,7 +193,6 @@
     state.phase = wasHit ? 'hit' : 'miss';
 
     if (wasHit) {
-
       state.hits++;
 
       if (resultDisplay) {
@@ -268,70 +203,45 @@
 
       playSound(audio.hit);
       playSound(audio.success);
-
     } else {
-
       if (resultDisplay) {
         resultDisplay.textContent = '¡Fallaste!';
       }
     }
   }
 
-  // ==========================================
-  // 9. SISTEMA DE CONFETI
-  // ==========================================
-
   function createConfetti(x, y) {
-
     const count = 65;
 
     for (let i = 0; i < count; i++) {
-
       state.confetti.push({
-
         x: x + (Math.random() - 0.5) * 24,
         y: y + (Math.random() - 0.5) * 18,
-
         vx: (Math.random() - 0.5) * 260,
         vy: -Math.random() * 260 - 40,
-
         gravity: 520,
-
         radius: Math.random() * 4 + 2,
-
         rotation: Math.random() * Math.PI,
         spin: (Math.random() - 0.5) * 8,
-
         life: 2.8,
-
         color: `hsl(${Math.floor(Math.random() * 360)} 90% 55%)`
       });
     }
   }
 
   function updateConfetti(dt) {
-
     state.confetti = state.confetti.filter(piece => {
-
       piece.life -= dt;
-
       piece.vy += piece.gravity * dt;
-
       piece.x += piece.vx * dt;
       piece.y += piece.vy * dt;
-
       piece.rotation += piece.spin * dt;
 
       return piece.life > 0 && piece.y < HEIGHT + 20;
     });
   }
 
-  // ==========================================
-  // 10. FÍSICA DEL MOVIMIENTO PARABÓLICO
-  // ==========================================
-
   function updatePhysics(dt, now) {
-
     if (state.phase !== 'flying') {
       return;
     }
@@ -343,9 +253,6 @@
 
     updateTimer();
 
-    // Pequeños pasos para mejorar la estabilidad
-    // y evitar depender de los FPS del navegador.
-
     const steps = Math.max(
       1,
       Math.ceil(dt / (1 / 120))
@@ -354,23 +261,15 @@
     const step = dt / steps;
 
     for (let i = 0; i < steps && state.phase === 'flying'; i++) {
-
-      // Movimiento horizontal
       state.x += state.vx * step;
-
-      // Movimiento vertical
       state.y -= state.vy * step;
-
-      // Gravedad
       state.vy -= GRAVITY * step;
 
-      // Comprobar colisión
       if (checkCollision()) {
         finishShot(true);
         break;
       }
 
-      // Comprobar límites del escenario
       if (
         state.x > WIDTH ||
         state.x + ARROW_LENGTH < 0 ||
@@ -381,47 +280,37 @@
     }
   }
 
-  // ==========================================
-  // 11. DIBUJAR ESCENARIO
-  // ==========================================
-
   function drawBackground() {
-
     ctx.clearRect(0, 0, WIDTH, HEIGHT);
 
-    // Cielo
-    ctx.fillStyle = '#8ecdf2';
+    const skyGradient = ctx.createLinearGradient(0, 0, 0, HEIGHT - 28);
+    skyGradient.addColorStop(0, '#72bce8');
+    skyGradient.addColorStop(1, '#bce3fa');
+    ctx.fillStyle = skyGradient;
     ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    // Nubes
     drawCloud(190, 100, 30, 6);
     drawCloud(550, 150, 40, 4);
 
-    // Sol
     ctx.beginPath();
-
     ctx.arc(48, 48, 34, 0, Math.PI * 2);
-
     ctx.fillStyle = '#ffdf45';
     ctx.fill();
-
     ctx.strokeStyle = '#f5c928';
     ctx.lineWidth = 3;
     ctx.stroke();
 
-    // Césped
-    ctx.fillStyle = '#65a84f';
+    drawTree(135, 1.0);
+    drawTree(290, 0.78);
+    drawTree(455, 1.12);
+    drawTree(645, 0.85);
+    drawTree(795, 1.05);
 
-    ctx.fillRect(
-      0,
-      HEIGHT - 28,
-      WIDTH,
-      28
-    );
+    ctx.fillStyle = '#65a84f';
+    ctx.fillRect(0, HEIGHT - 28, WIDTH, 28);
 
     ctx.strokeStyle = '#347b36';
     ctx.lineWidth = 4;
-
     ctx.beginPath();
     ctx.moveTo(0, HEIGHT - 28);
     ctx.lineTo(WIDTH, HEIGHT - 28);
@@ -429,13 +318,10 @@
   }
 
   function drawCloud(x, y, radius, count) {
-
     ctx.beginPath();
 
     for (let i = 0; i < count; i++) {
-
       ctx.moveTo(x + i * radius, y);
-
       ctx.arc(
         x + i * radius,
         y,
@@ -449,26 +335,58 @@
     ctx.fill();
   }
 
-  // ==========================================
-  // 12. DIBUJAR DIANA
-  // ==========================================
+  function drawTree(x, scale) {
+    const baseY = HEIGHT - 28;
+    const trunkWidth = 18 * scale;
+    const trunkHeight = 62 * scale;
+    const crownRadius = 32 * scale;
+
+    ctx.save();
+
+    ctx.fillStyle = '#7c5334';
+    ctx.fillRect(
+      x - trunkWidth / 2,
+      baseY - trunkHeight,
+      trunkWidth,
+      trunkHeight
+    );
+
+    ctx.fillStyle = '#5e3d24';
+    ctx.fillRect(
+      x,
+      baseY - trunkHeight,
+      trunkWidth / 2,
+      trunkHeight
+    );
+
+    const crownY = baseY - trunkHeight;
+
+    ctx.beginPath();
+    ctx.arc(x - crownRadius * 0.55, crownY + crownRadius * 0.25, crownRadius * 0.75, 0, Math.PI * 2);
+    ctx.arc(x + crownRadius * 0.55, crownY + crownRadius * 0.25, crownRadius * 0.75, 0, Math.PI * 2);
+    ctx.arc(x, crownY - crownRadius * 0.25, crownRadius, 0, Math.PI * 2);
+    ctx.fillStyle = '#3d8b40';
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(x - crownRadius * 0.25, crownY - crownRadius * 0.35, crownRadius * 0.55, 0, Math.PI * 2);
+    ctx.fillStyle = '#4ea352';
+    ctx.fill();
+
+    ctx.restore();
+  }
 
   function drawTarget() {
-
     const rings = [
-
       { radius: 32, color: '#e53935' },
       { radius: 26, color: '#ffffff' },
       { radius: 20, color: '#e53935' },
       { radius: 14, color: '#ffffff' },
       { radius: 8, color: '#e53935' }
-
     ];
 
     for (const ring of rings) {
-
       ctx.beginPath();
-
       ctx.arc(
         state.targetX,
         GROUND_Y,
@@ -476,55 +394,37 @@
         0,
         Math.PI * 2
       );
-
       ctx.fillStyle = ring.color;
       ctx.fill();
     }
   }
 
-  // ==========================================
-  // 13. DIBUJAR FLECHA
-  // ==========================================
-
   function drawArrow() {
-
     ctx.save();
-
     ctx.translate(state.x, state.y);
 
-    // Parte trasera
     ctx.beginPath();
-
     ctx.moveTo(5, 10);
     ctx.lineTo(15, 20);
     ctx.lineTo(5, 30);
-
     ctx.closePath();
 
     ctx.fillStyle = ARROW_COLOR;
     ctx.fill();
-
     ctx.fillRect(-3, 10, 8, 20);
 
-    // Cuerpo
     ctx.beginPath();
-
     ctx.moveTo(3, 20);
     ctx.lineTo(40, 20);
-
     ctx.strokeStyle = '#ffffff';
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
-
     ctx.stroke();
 
-    // Punta
     ctx.beginPath();
-
     ctx.moveTo(40, 10);
     ctx.lineTo(60, 20);
     ctx.lineTo(40, 30);
-
     ctx.closePath();
 
     ctx.fillStyle = '#222222';
@@ -533,19 +433,11 @@
     ctx.restore();
   }
 
-  // ==========================================
-  // 14. CONTADOR DE ACIERTOS
-  // ==========================================
-
   function drawScore() {
-
     ctx.save();
-
     ctx.font = 'bold 30px KG Happy, sans-serif';
-
     ctx.textAlign = 'right';
     ctx.textBaseline = 'top';
-
     ctx.fillStyle = '#222222';
 
     ctx.fillText(
@@ -557,60 +449,35 @@
     ctx.restore();
   }
 
-  // ==========================================
-  // 15. DIBUJAR CONFETI
-  // ==========================================
-
   function drawConfetti() {
-
     for (const piece of state.confetti) {
-
       ctx.save();
-
       ctx.translate(piece.x, piece.y);
       ctx.rotate(piece.rotation);
-
       ctx.fillStyle = piece.color;
-
       ctx.fillRect(
         -piece.radius,
         -piece.radius / 2,
         piece.radius * 2,
         piece.radius
       );
-
       ctx.restore();
     }
   }
 
-  // ==========================================
-  // 16. RENDERIZADO
-  // ==========================================
-
   function render() {
-
     drawBackground();
-
     drawTarget();
-
     drawArrow();
-
     drawScore();
-
     drawConfetti();
   }
 
-  // ==========================================
-  // 17. BUCLE PRINCIPAL DE ANIMACIÓN
-  // ==========================================
-
   function animationFrame(now) {
-
     if (!state.lastFrameAt) {
       state.lastFrameAt = now;
     }
 
-    // Limitar saltos de tiempo al cambiar de pestaña
     const dt = Math.min(
       (now - state.lastFrameAt) / 1000,
       0.05
@@ -619,30 +486,16 @@
     state.lastFrameAt = now;
 
     updatePhysics(dt, now);
-
     updateConfetti(dt);
-
     render();
 
     requestAnimationFrame(animationFrame);
   }
 
-  // ==========================================
-  // 18. EVENTOS DE LOS BOTONES
-  // ==========================================
-
   fireButton.addEventListener('click', fire);
-
   resetButton.addEventListener('click', resetGame);
 
-  // ==========================================
-  // 19. INICIALIZACIÓN
-  // ==========================================
-
   resetGame();
-
   render();
-
   requestAnimationFrame(animationFrame);
-
 })();
