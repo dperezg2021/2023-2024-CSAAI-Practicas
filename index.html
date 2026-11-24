@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prácticas CSAAI 2023/24</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Configuración personalizada de Tailwind -->
     <script>
         tailwind.config = {
             theme: {
@@ -29,10 +26,8 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col md:flex-row min-h-screen">
 
-    <!-- Sidebar / Menú de navegación -->
     <aside class="w-full md:w-80 bg-slate-900 text-slate-300 md:fixed md:h-screen md:overflow-y-auto flex-shrink-0 z-20 shadow-2xl">
         <div class="p-8">
-            <!-- Logos -->
             <div class="flex items-center justify-center gap-4 mb-8">
                 <div class="bg-white/10 p-3 rounded-2xl backdrop-blur-sm shadow-inner">
                     <img id="imghtml" src="urjc_escudo.png" alt="URJC" class="w-16 h-16 object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1e293b/ffffff?text=URJC';">
@@ -42,18 +37,15 @@
                 </div>
             </div>
 
-            <!-- Título de la cabecera -->
             <h1 class="text-2xl font-bold text-white mb-2 leading-tight">Índice de prácticas</h1>
             <p class="text-indigo-400 font-medium text-sm mb-6 uppercase tracking-wider">CSAAI 2023/24</p>
             
-            <!-- Descripciones fusionadas -->
             <div class="text-sm space-y-4 mb-8 text-slate-400">
                 <p>
                     Esta es mi página web de las prácticas de HTML, Javascript y Css de la asignatura <strong class="text-slate-200">Construcción de Servicios y Aplicaciones Audiovisuales en Internet</strong>. Curso 2023-2024.
                 </p>
             </div>
 
-            <!-- Navegación lateral -->
             <nav>
                 <h3 class="text-xs uppercase font-semibold text-slate-500 mb-4 tracking-widest">Accesos Rápidos</h3>
                 <ul class="space-y-2">
@@ -87,12 +79,17 @@
                             Práctica 5
                         </a>
                     </li>
+                    <li>
+                        <a href="https://dperezg2021.github.io/2023-2024-CSAAI-Practicas/p6" class="flex items-center p-3 rounded-lg hover:bg-slate-800 hover:text-white transition-colors group">
+                            <span class="bg-slate-800 group-hover:bg-indigo-600 text-slate-300 group-hover:text-white w-8 h-8 flex items-center justify-center rounded-md mr-3 transition-colors text-sm font-bold">6</span>
+                            Práctica 6
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </aside>
 
-    <!-- Contenido Principal -->
     <main class="w-full md:ml-80 flex-1 p-6 md:p-10 lg:p-16">
         
         <header class="mb-12">
@@ -100,10 +97,8 @@
             <p class="text-slate-500 mt-2 text-lg">Explora las prácticas realizadas durante el curso.</p>
         </header>
 
-        <!-- Grid de Tarjetas (Cards) -->
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8 relative z-10">
 
-            <!-- Tarjeta Práctica 1 -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div class="h-56 bg-slate-200 overflow-hidden relative">
                     <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
@@ -122,7 +117,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta Práctica 2 -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div class="h-56 bg-slate-200 overflow-hidden relative">
                     <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
@@ -141,7 +135,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta Práctica 3 -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div class="h-56 bg-slate-200 overflow-hidden relative">
                     <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
@@ -160,7 +153,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta Práctica 4 -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div class="h-56 bg-slate-200 overflow-hidden relative">
                     <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
@@ -179,7 +171,6 @@
                 </div>
             </article>
 
-            <!-- Tarjeta Práctica 5 -->
             <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
                 <div class="h-56 bg-slate-200 overflow-hidden relative">
                     <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
@@ -198,10 +189,28 @@
                 </div>
             </article>
 
+            <article class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                <div class="h-56 bg-slate-200 overflow-hidden relative">
+                    <div class="absolute inset-0 bg-indigo-900/10 mix-blend-multiply z-10 pointer-events-none"></div>
+                    <img src="p6cap.PNG" alt="Práctica 6 Brick Breaker" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/800x600/0f172a/ef4444?text=Brick+Breaker';">
+                </div>
+                <div class="p-8 flex flex-col flex-1">
+                    <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider mb-2">Práctica 6</span>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-3" id="practica_6">Brick Breaker</h3>
+                    <p class="text-slate-600 mb-8 flex-1 leading-relaxed">
+                        En esta sexta práctica desarrollada con React y TypeScript he recreado el mítico juego de BlackBerry en el que controlas una barra para hacer rebotar una bola roja y destruir todos los bloques de colores.
+                    </p>
+                    <a href="https://dperezg2021.github.io/2023-2024-CSAAI-Practicas/p6" target="_blank" class="inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-xl hover:bg-indigo-700 transition-colors shadow-sm shadow-indigo-200 w-full sm:w-auto self-start">
+                        Ver la práctica
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+            </article>
+
         </div>
         
         <footer class="mt-16 pt-8 border-t border-slate-200 text-center text-slate-500 text-sm">
-            <p>Universidad Rey Juan Carlos &copy; 2023-2024</p>
+            <p>Universidad Rey Juan Carlos &copy; 2026-2027</p>
         </footer>
 
     </main>
